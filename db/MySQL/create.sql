@@ -1,8 +1,8 @@
-drop database if exists Cebola;
+drop database if exists Login;
 
-create database Cebola;
+create database Login;
 
-use Cebola;
+use Login;
 
 create table Usuario(
   id bigint not null auto_increment, 
