@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Autenticação de Usuário</title>
-        <link href="${pageContext.request.contextPath}/layout.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <h1>Autenticação de Usuário</h1>
@@ -36,6 +36,5 @@
                     </td>
                 </tr>
             </table>
-        </form>
     </body>
 </html>

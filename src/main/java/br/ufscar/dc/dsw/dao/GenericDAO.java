@@ -34,7 +34,7 @@ abstract public class GenericDAO {
     	
     	/* Conexão banco de dados MySQL */
     	
-    	String url = "jdbc:mysql://localhost:3306/Login";
+    	String url = "jdbc:mysql://localhost:3306/Cebola";
     	
     	return DriverManager.getConnection(url, "root", "root");
     }

@@ -5,6 +5,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	
 	<groupId>br.ufscar.dc.dsw</groupId>
 	<artifactId>Login</artifactId>
 	<version>1.0-SNAPSHOT</version>
@@ -74,7 +75,10 @@
 				<configuration>
 					<url>http://localhost:8080/manager/text</url>
 					<server>Tomcat9</server>
+					<username>admin</username>
+					<password>admin</password>
 					<path>/${project.artifactId}</path>
+					<update>true</update>
 				</configuration>
 			</plugin>
 		</plugins>
