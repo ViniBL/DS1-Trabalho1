@@ -120,6 +120,8 @@ select * from Agencia;
 select * from Destino;
 select * from Fotos_destino;
 select * from Fotos_destino where id_destino=1;
+
+
 select * from Pacote;
 select * from Pacotes_adquiridos;
 update Pacotes_adquiridos set status='CANCELADO' WHERE id_pacote=2;
