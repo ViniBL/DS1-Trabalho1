@@ -3,13 +3,13 @@ package br.ufscar.dc.dsw.domain;
 public class pacote {
 	private Long id_pacote;
 	private String data_partida;
-	private Integer duracao;
+	private int duracao;
 	private Float valor;
 	private String descricao;
 	private agencia agencia;
 	private destino destino;
-	public pacote(Long id_pacote, String data_partida, Integer duracao, Float valor, String descricao,
-			br.ufscar.dc.dsw.domain.agencia agencia, br.ufscar.dc.dsw.domain.destino destino) {
+	public pacote(Long id_pacote, String data_partida, int duracao, Float valor, String descricao,
+			agencia agencia, destino destino) {
 		super();
 		this.id_pacote = id_pacote;
 		this.data_partida = data_partida;
@@ -31,7 +31,7 @@ public class pacote {
 	public void setData_partida(String data_partida) {
 		this.data_partida = data_partida;
 	}
-	public Integer getDuracao() {
+	public int getDuracao() {
 		return duracao;
 	}
 	public void setDuracao(Integer duracao) {
