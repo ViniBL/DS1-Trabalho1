@@ -14,6 +14,37 @@ import br.ufscar.dc.dsw.domain.agencia;
 import br.ufscar.dc.dsw.domain.destino;
 
 public class pacoteDAO extends GenericDAO {
+     
+    
+    public void insert(pacote pkg)
+    {
+        String sql = "INSERT INTO pacote (id_pacote, data_partida, duracao, valor, descricao, agencia, destino) VALUES (?, ?, ?, ?, ?)";
+
+        try
+        {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.SetLong(1, pacote.getId_pacote());
+            statement.SetString(2, pacote.getData_partida());
+            statement.SetInt(3, pacote.getDuracao());
+            statement.SetFloat(4, pacote.getValor());
+            statement.SetString(5, pacote.getDescricao());
+            statement.setAgencia(6, pacote.getAgencia());
+            statement.SetString(7, pacote.getDestino());
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } 
+        catch (SQLException e) 
+        {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
 
     public pacote<pacote> getAll() {
 
@@ -55,4 +86,89 @@ public class pacoteDAO extends GenericDAO {
         return listaPacotes;
     }
 
+      public void delete(pacote pkg)
+     {
+        String sql = "DELETE FROM pacote where id = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setLong(1, pacote.getId_pacote());
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+      public pacote get(Long id_pacote)
+    {
+        pacote pkg = null;
+        statement sql = "SELECT *from pacote p where id = ?";
+
+        try
+        {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setLong(1, id_pacote);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next())
+            {
+                Long id = resultSet.getLong("id_pacote");
+                String data_partida = resultSet.getString("data_partida");
+                int duracao = resultSet.getInt("duracao");
+                float valor = resultSet.getFloat("valor");
+                String descricao =  resultSet.getString("descricao");
+                agencia ag =  new AgenciaDAO().get(id_agencia);
+                destino dest = new DestinoDAO().get(id_destino);
+
+                pkg = new pacote(id_pacote, data_partida, duracao, valor, descricao, ag, dest);
+            }
+        }
+
+        resultSet.close();
+        statement.close();
+        conn.close();
+
+        catch (SQLException e) 
+        {
+            throw new RuntimeException(e);
+        }
+
+        return pkg;
+    }
+    
+      public void update(pacote pkg)
+    {
+        String sql = "UPDATE pacote SET data_partida = ?, duracao = ?, valor = ?, descricao = ?";
+        sql += "id_agencia = ?, id_destino = ?, WHERE id =? ";
+
+        try
+        {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.SetLong(1, pacote.getId_pacote());
+            statement.SetString(2, pacote.getData_partida());
+            statement.SetInt(3, pacote.getDuracao());
+            statement.SetFloat(4, pacote.getValor());
+            statement.SetString(5, pacote.getDescricao());
+            statement.setAgencia(6, pacote.getAgencia());
+            statement.SetString(7, pacote.getDestino());
+            statement.executeUpdate();
+
+
+
+        }
+        catch (SQLException e) 
+        {
+            throw new RuntimeException(e);
+        }
+    }
 }
