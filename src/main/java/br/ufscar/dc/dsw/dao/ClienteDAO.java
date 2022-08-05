@@ -109,7 +109,7 @@ public class ClienteDAO extends GenericDAO {
         }
     }
 
-    public cliente getbyID(Long id_cliente) {
+    public cliente get(Long id_cliente) {
         cliente cliente = null;
 
         String sql = "SELECT * from cliente c, usuario u WHERE c.id_cliente = ?, c.id_usuario=u.id";

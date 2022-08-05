@@ -12,7 +12,7 @@ import java.util.List;
 import br.ufscar.dc.dsw.domain.pacotes_adquiridos;
 import br.ufscar.dc.dsw.domain.cliente;
 import br.ufscar.dc.dsw.domain.pacote;
-import br.ufscar.dc.dsw.dao.PacoteDAO;
+import br.ufscar.dc.dsw.dao.pacoteDAO;
 import br.ufscar.dc.dsw.dao.ClienteDAO;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.domain.agencia;
@@ -58,14 +58,14 @@ public class PacotesAdquiridosDAO extends GenericDAO {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 Long id_pacote_adquirido = resultSet.getLong("id_pacote_adquirido");
-                String status = resultSet.getLong("status");
+                String status = resultSet.getString("status");
                 Long id_cliente = resultSet.getLong("id_cliente");
                 Long id_pacote = resultSet.getLong("id_pacote");
 
         
-                pacote pacote = new PacoteDAO().get(pacoteId);
-                cliente cliente = new ClienteDAO().get(clienteId);
-                pacote_adquirido = new pacotes_adquiridos(id_pacote_adquirido, status, cliente, pacote);
+                pacote pacote = new pacoteDAO().get(id_pacote);
+                cliente cliente = new ClienteDAO().get(id_cliente);
+                pacotes_adquiridos pacote_adquirido = new pacotes_adquiridos(id_pacote_adquirido, status, cliente, pacote);
                 listaPacotes_adquiridos.add(pacote_adquirido);
             }
 
@@ -96,9 +96,9 @@ public class PacotesAdquiridosDAO extends GenericDAO {
        }
    }
    
-     public pacote_adquirido get(Long id_pacote_adquirido)
+     public pacotes_adquiridos get(Long id_pacote_adquirido)
    {
-       pacote_adquirido pacote_adquirido = null;
+       pacotes_adquiridos pacote_adquirido = null;
        String sql = "SELECT * from pacotes_adquiridos where id = ?";
 
        try
@@ -147,7 +147,7 @@ public class PacotesAdquiridosDAO extends GenericDAO {
            PreparedStatement statement = conn.prepareStatement(sql);
 
            statement.setString(1, pacote_adquirido.getStatus());
-           statement.setString(2, pacote_adquirido.getId_pacote_adquirido());
+           statement.setLong(2, pacote_adquirido.getId_pacote_adquirido());
            statement.executeUpdate();
 
 
