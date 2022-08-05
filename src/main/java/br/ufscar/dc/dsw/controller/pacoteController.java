@@ -1,15 +1,17 @@
 package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.pacoteDAO;
+import br.ufscar.dc.dsw.dao.AgenciaDAO;
+import br.ufscar.dc.dsw.dao.DestinoDAO;
 import br.ufscar.dc.dsw.domain.pacote;
-//import br.ufscar.dc.dsw.domain.agencia;
-//import br.ufscar.dc.dsw.domain.Usuario;
-//import br.ufscar.dc.dsw.domain.destino;
+import br.ufscar.dc.dsw.domain.agencia;
+import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.destino;
 
 import java.io.IOException;
-//import java.util.HashMap;
+import java.util.HashMap;
 import java.util.List;
-//import java.util.Map;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,7 +47,7 @@ public class pacoteController extends HttpServlet {
         }
         
         try {
-            /*
+            
             switch (action) {
                 case "/cadastro":
                     apresentaFormCadastro(request, response);
@@ -66,8 +68,8 @@ public class pacoteController extends HttpServlet {
                     lista(request, response);
                     break;
             }
-            */
-            lista(request, response);
+            
+            //lista(request, response);
             
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
@@ -81,19 +83,27 @@ public class pacoteController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/webapp/login.jsp");
         dispatcher.forward(request, response);
     }
-/*
-    private Map<Long, String> getEditoras() {
-        Map <Long,String> editoras = new HashMap<>();
-        for (Editora editora: new EditoraDAO().getAll()) {
-            editoras.put(editora.getId(), editora.getNome());
+
+    private Map<Long, String> getAgencias() {
+        Map <Long,String> agencias = new HashMap<>();
+        for (agencia agencia: new AgenciaDAO().getAll()) {
+            agencias.put(agencia.getId_agencia(), agencia.getNome());
         }
-        return editoras;
+        return agencias;
+    }
+
+    private Map<Long, String> getDestinos() {
+        Map <Long,String> destinos = new HashMap<>();
+        for (destino destino: new DestinoDAO().getAll()) {
+            agencias.put(agencia.getId_agencia(), agencia.getNome());
+        }
+        return agencias;
     }
     
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("editoras", getEditoras());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/livro/formulario.jsp");
+        request.setAttribute("agencias", getAgencias());
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/pacote/formulario.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -150,5 +160,5 @@ public class pacoteController extends HttpServlet {
         dao.delete(livro);
         response.sendRedirect("lista");
     }
-    */
+    
 }

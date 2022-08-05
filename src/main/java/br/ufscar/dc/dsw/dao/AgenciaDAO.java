@@ -34,7 +34,7 @@ public class AgenciaDAO extends GenericDAO {
         }
     }
 
-    public List<agencia> getALL() {
+    public List<agencia> getAll() {
         List<agencia> listaAgencia = new ArrayList<>();
         String sql = "SELECT * from agencia a, Usuario u where a.USUARIO_ID = u.ID order by a.id_agencia";
 
