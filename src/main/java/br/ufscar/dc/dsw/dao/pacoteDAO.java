@@ -106,7 +106,7 @@ public class pacoteDAO extends GenericDAO {
            throw new RuntimeException(e);
        }
    }
-   /*
+   
      public pacote get(Long id_pacote)
    {
        pacote pacote = null;
@@ -160,13 +160,12 @@ public class pacoteDAO extends GenericDAO {
            Connection conn = this.getConnection();
            PreparedStatement statement = conn.prepareStatement(sql);
 
-           statement.SetLong(1, pacote.getId_pacote());
-           statement.SetString(2, pacote.getData_partida());
-           statement.SetInt(3, pacote.getDuracao());
-           statement.SetFloat(4, pacote.getValor());
-           statement.SetString(5, pacote.getDescricao());
-           statement.setAgencia(6, pacote.getAgencia());
-           statement.SetString(7, pacote.getDestino());
+           statement.setString(2, pacote.getData_partida());
+           statement.setInt(3, pacote.getDuracao());
+           statement.setFloat(4, pacote.getValor());
+           statement.setString(5, pacote.getDescricao());
+           statement.setString(6, pacote.getAgencia().getId_agencia());
+           statement.setString(7, pacote.getDestino().getId_destino);
            statement.executeUpdate();
 
 
@@ -177,5 +176,4 @@ public class pacoteDAO extends GenericDAO {
            throw new RuntimeException(e);
        }
    }
-*/
 }
