@@ -12,7 +12,7 @@ import br.ufscar.dc.dsw.domain.destino;
 
 public class DestinoDAO extends GenericDAO {
 
-    public void insert(Destino destino)
+    public void insert(destino destino)
     {
         String sql = "INSERT INTO destino (cidade, estado, pais) VALUES (?, ?, ?)";
 
@@ -105,7 +105,7 @@ public class DestinoDAO extends GenericDAO {
        }
    }
 
-   public destino getbyID(Long id_destino) {
+   public destino get(Long id_destino) {
         destino destino = null;
 
         String sql = "SELECT * from destino WHERE id_destino = ?";
@@ -129,7 +129,7 @@ public class DestinoDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return cliente;
+        return destino;
     }
 
 }

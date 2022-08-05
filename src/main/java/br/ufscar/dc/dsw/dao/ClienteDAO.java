@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.cliente;
+import br.ufscar.dc.dsw.domain.Usuario;
 
 public class ClienteDAO extends GenericDAO {
 
-    public void insert(Cliente cliente) {
+    public void insert(cliente cliente) {
 
         String sql = "INSERT INTO Cliente (id_cliente, cpf, telefone, sexo, data_nascimento) VALUES (?, ?, ?, ?, ?)";
 
@@ -39,7 +40,7 @@ public class ClienteDAO extends GenericDAO {
 
         List<cliente> listaClientes = new ArrayList<>();
 
-        String sql = "SELECT * from cliente c";
+        String sql = "SELECT * from cliente c, usuario u WHERE c.id_usuario=u.id";
 
         try {
             Connection conn = this.getConnection();
@@ -47,18 +48,17 @@ public class ClienteDAO extends GenericDAO {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                long id = resultSet.getLong("id");
-                String nome = resultSet.getString("nome");
-                String login = resultSet.getString("login");
-                String senha = resultSet.getString("senha");
-                String papel = resultSet.getString("papel");
-                long id_cliente = resultSet.getLong("id_cliente");
-                long id_usuario = resultSet.getLong("id_usuario");
-                String cpf = resultSet.getString("cpf");
-                String telefone = resultSet.getString("telefone");
-                String sexo = resultSet.getString("sexo");
-                String data_nascimento = resultSet.getString("data_nascimento");
-                Usuario usuario = new Usuario(id, nome1, login, senha, papel);
+                long id = resultSet.getLong("u.id");
+                String nome = resultSet.getString("u.nome");
+                String login = resultSet.getString("u.login");
+                String senha = resultSet.getString("u.senha");
+                String papel = resultSet.getString("u.papel");
+                long id_cliente = resultSet.getLong("c.id_cliente");
+                String cpf = resultSet.getString("u.cpf");
+                String telefone = resultSet.getString("u.telefone");
+                String sexo = resultSet.getString("u.sexo");
+                String data_nascimento = resultSet.getString("u.data_nascimento");
+                Usuario usuario = new Usuario(id, nome, login, senha, papel);
                 cliente cliente = new cliente(id_cliente, cpf, telefone, sexo, data_nascimento, usuario);
                 listaClientes.add(cliente);
             }
@@ -112,7 +112,7 @@ public class ClienteDAO extends GenericDAO {
     public cliente getbyID(Long id_cliente) {
         cliente cliente = null;
 
-        String sql = "SELECT * from cliente WHERE id_cliente = ?";
+        String sql = "SELECT * from cliente c, usuario u WHERE c.id_cliente = ?, c.id_usuario=u.id";
 
         try {
             Connection conn = this.getConnection();
@@ -121,13 +121,20 @@ public class ClienteDAO extends GenericDAO {
             statement.setLong(1, id_cliente);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                Long id_usuario = resultSet.getLong("id_usuario");
-                String cpf = resultSet.getString("cpf");
-                String telefone = resultSet.getString("telefone");
-                String sexo = resultSet.getString("sexo");
-                String data_nascimento = resultSet.getString("data_nascimento");
+                String cpf = resultSet.getString("c.cpf");
+                String telefone = resultSet.getString("c.telefone");
+                String sexo = resultSet.getString("c.sexo");
+                String data_nascimento = resultSet.getString("c.data_nascimento");
+                
+                Long id = resultSet.getLong("u.id");
+                String nome1 = resultSet.getString("u.nome");
+                String login = resultSet.getString("u.login");
+                String senha = resultSet.getString("u.senha");
+                String papel = resultSet.getString("u.papel");
+                Usuario usuario = new Usuario(id, nome1, login, senha, papel);
 
-                cliente = new cliente(id_usuario, cpf, telefone, sexo, data_nascimento);
+
+                cliente = new cliente(id_cliente, cpf, telefone, sexo, data_nascimento, usuario);
             }
 
             resultSet.close();
