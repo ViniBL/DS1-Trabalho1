@@ -77,7 +77,7 @@ public class DestinoDAO extends GenericDAO {
             statement.setString(1, destino.getCidade());
             statement.setString(2, destino.getEstado());
             statement.setString(3, destino.getPais());
-            statement.setString(4, destino.getId_destino());
+            statement.setLong(4, destino.getId_destino());
             statement.executeUpdate();
 
             statement.close();
