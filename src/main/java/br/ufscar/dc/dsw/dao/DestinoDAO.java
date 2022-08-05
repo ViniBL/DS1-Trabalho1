@@ -49,7 +49,7 @@ public class DestinoDAO extends GenericDAO {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                Long id_destino = resultSet.getLong("id_pacote");
+                Long id_destino = resultSet.getLong("id_destino");
                 String cidade = resultSet.getString("cidade");
                 String estado = resultSet.getString("estado");
                 String pais = resultSet.getString("pais");
