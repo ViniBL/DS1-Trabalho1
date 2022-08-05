@@ -144,7 +144,7 @@ public class UsuarioDAO extends GenericDAO {
             	Long id = resultSet.getLong("id_usuario");
                 String nome = resultSet.getString("nome");
                 String senha = resultSet.getString("senha");
-                String papel = resultSet.getString("perfil");
+                String papel = resultSet.getString("papel");
 
                 usuario = new Usuario(id, nome, login, senha, papel);
             }

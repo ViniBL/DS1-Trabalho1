@@ -14,24 +14,22 @@ import br.ufscar.dc.dsw.domain.agencia;
 import br.ufscar.dc.dsw.domain.destino;
 
 public class pacoteDAO extends GenericDAO {
-     
-    
-    public void insert(pacote pkg)
+
+    public void insert(pacote pacote)
     {
-        String sql = "INSERT INTO pacote (id_pacote, data_partida, duracao, valor, descricao, agencia, destino) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pacote (id_agencia, id_destino, data_partida, duracao, valor, descricao) VALUES (?, ?, ?, ?, ?, ?)";
 
         try
         {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.SetLong(1, pacote.getId_pacote());
-            statement.SetString(2, pacote.getData_partida());
-            statement.SetInt(3, pacote.getDuracao());
-            statement.SetFloat(4, pacote.getValor());
-            statement.SetString(5, pacote.getDescricao());
-            statement.setAgencia(6, pacote.getAgencia());
-            statement.SetString(7, pacote.getDestino());
+            statement.setLong(1, pacote.getAgencia().getId_agencia());
+            statement.setLong(2, pacote.getDestino().getId_destino());
+            statement.setString(3, pacote.getData_partida());
+            statement.setInt(4, pacote.getDuracao());
+            statement.setFloat(5, pacote.getValor());
+            statement.setString(6, pacote.getDescricao());
             statement.executeUpdate();
 
             statement.close();
@@ -45,10 +43,9 @@ public class pacoteDAO extends GenericDAO {
 
     }
 
+    public List<pacote> getAll() {
 
-    public pacote<pacote> getAll() {
-
-    	pacote<pacote>  listaPacotes = new ArrayList<>();
+    	List<pacote>  listaPacotes = new ArrayList<>();
 
         String sql = "SELECT * from pacote p, agencia a, destino d where p.AGENCIA_ID_AGENCIA = a.ID_AGENCIA, p.DESTINO_ID_DESTINO = d.ID_DESTINO order by p.id_pacote";
 
@@ -70,8 +67,14 @@ public class pacoteDAO extends GenericDAO {
                 String cidade = resultSet.getString("cidade");
                 String estado = resultSet.getString("estado");
                 String pais = resultSet.getString("pais");
-                Usuario usuario = new Usuario(id, nome, login, senha, papel);
-                agencia agencia = new agencia(id_agencia, cnpj, descricao1, usuario);
+                Long id = resultSet.getLong("id");
+                String nome1 = resultSet.getString("nome");
+                String login = resultSet.getString("login");
+                String senha = resultSet.getString("senha");
+                String papel = resultSet.getString("papel");
+                Long id_destino = resultSet.getLong("id_destino");
+                Usuario usuario = new Usuario(id, nome1, login, senha, papel);
+                agencia agencia = new agencia(id_agencia, nome, cnpj, descricao1, usuario);
                 destino destino = new destino(id_destino, cidade, estado, pais);
                 pacote pacote = new pacote(id_pacote, data_partida, duracao, valor, descricao, agencia, destino);
                 listaPacotes.add(pacote);
@@ -86,89 +89,93 @@ public class pacoteDAO extends GenericDAO {
         return listaPacotes;
     }
 
-      public void delete(pacote pkg)
-     {
-        String sql = "DELETE FROM pacote where id = ?";
-
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
-
-            statement.setLong(1, pacote.getId_pacote());
-            statement.executeUpdate();
-
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    
-      public pacote get(Long id_pacote)
+    public void delete(pacote pacote)
     {
-        pacote pkg = null;
-        statement sql = "SELECT *from pacote p where id = ?";
+       String sql = "DELETE FROM pacote where id = ?";
 
-        try
-        {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
+       try {
+           Connection conn = this.getConnection();
+           PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, id_pacote);
+           statement.setLong(1, pacote.getId_pacote());
+           statement.executeUpdate();
 
-            ResultSet resultSet = statement.executeQuery();
+           statement.close();
+           conn.close();
+       } catch (SQLException e) {
+           throw new RuntimeException(e);
+       }
+   }
+   /*
+     public pacote get(Long id_pacote)
+   {
+       pacote pacote = null;
+       String sql = "SELECT *from pacote p where id = ?";
 
-            if(resultSet.next())
-            {
-                Long id = resultSet.getLong("id_pacote");
-                String data_partida = resultSet.getString("data_partida");
-                int duracao = resultSet.getInt("duracao");
-                float valor = resultSet.getFloat("valor");
-                String descricao =  resultSet.getString("descricao");
-                agencia ag =  new AgenciaDAO().get(id_agencia);
-                destino dest = new DestinoDAO().get(id_destino);
+       try
+       {
+           Connection conn = this.getConnection();
+           PreparedStatement statement = conn.prepareStatement(sql);
 
-                pkg = new pacote(id_pacote, data_partida, duracao, valor, descricao, ag, dest);
-            }
-        }
+           statement.setLong(1, id_pacote);
 
-        resultSet.close();
-        statement.close();
-        conn.close();
+           ResultSet resultSet = statement.executeQuery();
 
-        catch (SQLException e) 
-        {
-            throw new RuntimeException(e);
-        }
+           if(resultSet.next())
+           {
+               String data_partida = resultSet.getString("data_partida");
+               int duracao = resultSet.getInt("duracao");
+               float valor = resultSet.getFloat("valor");
+               String descricao =  resultSet.getString("descricao");
 
-        return pkg;
+               Long agenciaId = resultSet.getLong("id_agencia");
+               Long destinoId = resultSet.getLong("id_destino");
+               agencia agencia =  new AgenciaDAO().get(agenciaId);
+               destino destino = new DestinoDAO().get(destinoId);
+
+               pacote = new pacote(id_pacote, data_partida, duracao, valor, descricao, ag, dest);
+           }
+       
+
+       resultSet.close();
+       statement.close();
+       conn.close();
     }
-    
-      public void update(pacote pkg)
-    {
-        String sql = "UPDATE pacote SET data_partida = ?, duracao = ?, valor = ?, descricao = ?";
-        sql += "id_agencia = ?, id_destino = ?, WHERE id =? ";
 
-        try
-        {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
+       catch (SQLException e) 
+       {
+           throw new RuntimeException(e);
+       }
 
-            statement.SetLong(1, pacote.getId_pacote());
-            statement.SetString(2, pacote.getData_partida());
-            statement.SetInt(3, pacote.getDuracao());
-            statement.SetFloat(4, pacote.getValor());
-            statement.SetString(5, pacote.getDescricao());
-            statement.setAgencia(6, pacote.getAgencia());
-            statement.SetString(7, pacote.getDestino());
-            statement.executeUpdate();
+       return pacote;
+   }
+   
+     public void update(pacote pacote)
+   {
+       String sql = "UPDATE pacote SET data_partida = ?, duracao = ?, valor = ?, descricao = ?";
+       sql += "id_agencia = ?, id_destino = ?, WHERE id =? ";
+
+       try
+       {
+           Connection conn = this.getConnection();
+           PreparedStatement statement = conn.prepareStatement(sql);
+
+           statement.SetLong(1, pacote.getId_pacote());
+           statement.SetString(2, pacote.getData_partida());
+           statement.SetInt(3, pacote.getDuracao());
+           statement.SetFloat(4, pacote.getValor());
+           statement.SetString(5, pacote.getDescricao());
+           statement.setAgencia(6, pacote.getAgencia());
+           statement.SetString(7, pacote.getDestino());
+           statement.executeUpdate();
 
 
 
-        }
-        catch (SQLException e) 
-        {
-            throw new RuntimeException(e);
-        }
-    }
+       }
+       catch (SQLException e) 
+       {
+           throw new RuntimeException(e);
+       }
+   }
+*/
 }

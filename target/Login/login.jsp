@@ -36,5 +36,44 @@
                     </td>
                 </tr>
             </table>
+        <%
+		    String contextPath = request.getContextPath().replace("/", "");
+	    %>
+	    <div align="center">
+		    <h1>Pacotes de Viagens Disponíveis</h1>
+            <h2>
+			    <a href="/<%=contextPath%>">Menu Principal</a> &nbsp;&nbsp;&nbsp; <a
+				    href="/<%=contextPath%>/livros/cadastro">Adicione Novo Livro</a>
+		    </h2>
+	    </div>
+
+	    <div align="center">
+		    <table border="1">
+			    <caption>Lista de Pacotes</caption>
+			    <tr>
+                    <th>Nome da Agência</th>
+                    <th>Destino</th>
+                    <th>Data de Partida</th>
+                    <th>Duração da Viagem</th>
+                    <th>Valor</th>
+                    <th>Descrição</th>
+                </tr>
+                <c:forEach var="pacote" items="${requestScope.listaPacotes}">
+                    <tr>
+                        <td>${pacote.agencia.nome}</td>
+                        <td>${pacote.destino.cidade} - ${pacote.destino.estado}/${pacote.destino.pais}</td>
+                        <td>${pacote.data_partida}</td>
+                        <td>${pacote.duracao} dias</td>
+                        <td>R$${pacote.valor}</td>
+                        <td>${pacote.descricao}</td>
+                        <td><a href="/<%= contextPath%>/livros/edicao?id=${livro.id}">Edição</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp; <a
+                            href="/<%= contextPath%>/livros/remocao?id=${livro.id}"
+                            onclick="return confirm('Tem certeza de que deseja excluir este item?');">
+                                Remoção </a></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
     </body>
 </html>

@@ -2,13 +2,15 @@ package br.ufscar.dc.dsw.domain;
 
 public class agencia {
 	private Long id_agencia;
+	private String nome;
 	private String cnpj;
 	private String descricao;
 	private Usuario usuario;
 	
-	public agencia(Long id_agencia, String cnpj, String descricao, Usuario usuario) {
+	public agencia(Long id_agencia, String nome, String cnpj, String descricao, Usuario usuario) {
 		super();
 		this.id_agencia = id_agencia;
+		this.nome = nome;
 		this.cnpj = cnpj;
 		this.descricao = descricao;
 		this.usuario = usuario;
@@ -20,6 +22,14 @@ public class agencia {
 
 	public void setId_agencia(Long id_agencia) {
 		this.id_agencia = id_agencia;
+	}
+
+	public String getNome(){
+		return nome;
+	}
+
+	public void setNome(String nome){
+		this.nome = nome;
 	}
 
 	public String getCnpj() {

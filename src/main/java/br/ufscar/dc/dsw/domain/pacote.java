@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.domain;
 
 public class pacote {
+
 	private Long id_pacote;
 	private String data_partida;
 	private int duracao;
@@ -8,17 +9,26 @@ public class pacote {
 	private String descricao;
 	private agencia agencia;
 	private destino destino;
-	
-	public pacote(Long id_pacote, String data_partida, int duracao, Float valor, String descricao,
-			agencia agencia, destino destino) {
-		super();
+
+	public pacote(Long id_pacote){
 		this.id_pacote = id_pacote;
+	}
+	
+	public pacote(String data_partida, int duracao, Float valor, String descricao,
+			agencia agencia, destino destino) {
 		this.data_partida = data_partida;
 		this.duracao = duracao;
 		this.valor = valor;
 		this.descricao = descricao;
 		this.agencia = agencia;
 		this.destino = destino;
+	}
+
+	public pacote(Long id_pacote, String data_partida, int duracao, Float valor, String descricao,
+			agencia agencia, destino destino){
+		this(data_partida, duracao, valor, descricao, agencia, destino);
+		this.id_pacote = id_pacote;
+
 	}
 	
 	public Long getId_pacote() {

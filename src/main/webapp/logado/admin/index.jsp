@@ -8,6 +8,7 @@
     </head>
     <body>
         <h1>Página do Administrador</h1>
+        
         <p>Olá ${sessionScope.usuarioLogado.nome}</p>
         <ul>
             <li>
