@@ -91,7 +91,7 @@ public class pacoteDAO extends GenericDAO {
 
     public void delete(pacote pacote)
     {
-       String sql = "DELETE FROM pacote where id = ?";
+       String sql = "DELETE FROM pacote where id_pacote = ?";
 
        try {
            Connection conn = this.getConnection();
@@ -110,7 +110,7 @@ public class pacoteDAO extends GenericDAO {
      public pacote get(Long id_pacote)
    {
        pacote pacote = null;
-       String sql = "SELECT *from pacote p where id = ?";
+       String sql = "SELECT *from pacote p where id_pacote = ?";
 
        try
        {
