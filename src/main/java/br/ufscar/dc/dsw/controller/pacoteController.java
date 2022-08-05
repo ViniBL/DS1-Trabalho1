@@ -1,15 +1,15 @@
-/*package br.ufscar.dc.dsw.controller;
+package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.pacoteDAO;
 import br.ufscar.dc.dsw.domain.pacote;
-import br.ufscar.dc.dsw.domain.agencia;
-import br.ufscar.dc.dsw.domain.Usuario;
-import br.ufscar.dc.dsw.domain.destino;
+//import br.ufscar.dc.dsw.domain.agencia;
+//import br.ufscar.dc.dsw.domain.Usuario;
+//import br.ufscar.dc.dsw.domain.destino;
 
 import java.io.IOException;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,8 +43,9 @@ public class pacoteController extends HttpServlet {
         if (action == null) {
             action = "";
         }
-
+        
         try {
+            /*
             switch (action) {
                 case "/cadastro":
                     apresentaFormCadastro(request, response);
@@ -65,6 +66,9 @@ public class pacoteController extends HttpServlet {
                     lista(request, response);
                     break;
             }
+            */
+            lista(request, response);
+            
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
@@ -74,10 +78,10 @@ public class pacoteController extends HttpServlet {
             throws ServletException, IOException {
         List<pacote> listaPacotes = dao.getAll();
         request.setAttribute("listaPacotes", listaPacotes);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/livro/lista.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/webapp/login.jsp");
         dispatcher.forward(request, response);
     }
-
+/*
     private Map<Long, String> getEditoras() {
         Map <Long,String> editoras = new HashMap<>();
         for (Editora editora: new EditoraDAO().getAll()) {
@@ -146,5 +150,5 @@ public class pacoteController extends HttpServlet {
         dao.delete(livro);
         response.sendRedirect("lista");
     }
+    */
 }
-*/
