@@ -47,8 +47,7 @@ public class pacoteDAO extends GenericDAO {
 
     	List<pacote>  listaPacotes = new ArrayList<>();
 
-        //String sql = "SELECT * from pacote p, agencia a, destino d where p.ID_AGENCIA = a.ID_AGENCIA, p.ID_DESTINO = d.ID_DESTINO order by p.id_pacote";
-        String sql = "SELECT * from pacote p";
+        String sql = "SELECT * from pacote p, agencia a, destino d, Usuario u where p.AGENCIA_ID_AGENCIA = a.ID_AGENCIA, p.DESTINO_ID_DESTINO = d.ID_DESTINO, a.AGENCIA_ID_USUARIO= u.ID order by p.id_pacote";
 
         try {
             Connection conn = this.getConnection();
@@ -56,24 +55,24 @@ public class pacoteDAO extends GenericDAO {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                Long id_pacote = resultSet.getLong("id_pacote");
-                int duracao = resultSet.getInt("duracao");
-                String data_partida = resultSet.getString("data_partida");
-                float valor = resultSet.getFloat("valor");
-                String descricao = resultSet.getString("descricao");
-                Long id_agencia = resultSet.getLong("id_agencia");
-                String cnpj = resultSet.getString("cnpj");
-                String descricao1 = resultSet.getString("descricao");
-                String nome = resultSet.getString("nome");
-                String cidade = resultSet.getString("cidade");
-                String estado = resultSet.getString("estado");
-                String pais = resultSet.getString("pais");
-                Long id = resultSet.getLong("id");
-                String nome1 = resultSet.getString("nome");
-                String login = resultSet.getString("login");
-                String senha = resultSet.getString("senha");
-                String papel = resultSet.getString("papel");
-                Long id_destino = resultSet.getLong("id_destino");
+                Long id_pacote = resultSet.getLong("p.id_pacote");
+                int duracao = resultSet.getInt("p.duracao");
+                String data_partida = resultSet.getString("p.data_partida");
+                float valor = resultSet.getFloat("p.valor");
+                String descricao = resultSet.getString("p.descricao");
+                Long id_agencia = resultSet.getLong("a.id_agencia");
+                String cnpj = resultSet.getString("a.cnpj");
+                String descricao1 = resultSet.getString("a.descricao");
+                String nome = resultSet.getString("a.nome");
+                String cidade = resultSet.getString("d.cidade");
+                String estado = resultSet.getString("d.estado");
+                String pais = resultSet.getString("d.pais");
+                Long id = resultSet.getLong("u.id");
+                String nome1 = resultSet.getString("u.nome");
+                String login = resultSet.getString("u.login");
+                String senha = resultSet.getString("u.senha");
+                String papel = resultSet.getString("u.papel");
+                Long id_destino = resultSet.getLong("d.id_destino");
                 Usuario usuario = new Usuario(id, nome1, login, senha, papel);
                 agencia agencia = new agencia(id_agencia, nome, cnpj, descricao1, usuario);
                 destino destino = new destino(id_destino, cidade, estado, pais);
@@ -154,19 +153,20 @@ public class pacoteDAO extends GenericDAO {
      public void update(pacote pacote)
    {
        String sql = "UPDATE pacote SET data_partida = ?, duracao = ?, valor = ?, descricao = ?";
-       sql += "id_agencia = ?, id_destino = ?, WHERE id =? ";
+       sql += "id_agencia = ?, id_destino = ?, WHERE id_pacote =? ";
 
        try
        {
            Connection conn = this.getConnection();
            PreparedStatement statement = conn.prepareStatement(sql);
 
-           statement.setString(2, pacote.getData_partida());
-           statement.setInt(3, pacote.getDuracao());
-           statement.setFloat(4, pacote.getValor());
-           statement.setString(5, pacote.getDescricao());
-           statement.setString(6, pacote.getAgencia().getId_agencia());
-           statement.setString(7, pacote.getDestino().getId_destino);
+           statement.setString(1, pacote.getData_partida());
+           statement.setInt(2, pacote.getDuracao());
+           statement.setFloat(3, pacote.getValor());
+           statement.setString(4, pacote.getDescricao());
+           statement.setLong(5, pacote.getAgencia().getId_agencia());
+           statement.setLong(6, pacote.getDestino().getId_destino());
+           statement.setLong(7, pacote.getId_pacote());
            statement.executeUpdate();
 
 
