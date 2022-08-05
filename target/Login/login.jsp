@@ -1,4 +1,4 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -41,10 +41,7 @@
 	    %>
 	    <div align="center">
 		    <h1>Pacotes de Viagens Disponíveis</h1>
-            <h2>
-			    <a href="/<%=contextPath%>">Menu Principal</a> &nbsp;&nbsp;&nbsp; <a
-				    href="/<%=contextPath%>/livros/cadastro">Adicione Novo Livro</a>
-		    </h2>
+           
 	    </div>
 
 	    <div align="center">
@@ -61,16 +58,12 @@
                 <c:forEach var="pacote" items="${requestScope.listaPacotes}">
                     <tr>
                         <td>${pacote.agencia.nome}</td>
-                        <td>${pacote.destino.cidade} - ${pacote.destino.estado}/${pacote.destino.pais}</td>
+                        <td>${pacote.destino.cidade}</td>
                         <td>${pacote.data_partida}</td>
-                        <td>${pacote.duracao} dias</td>
-                        <td>R$${pacote.valor}</td>
+                        <td>${pacote.duracao}</td>
+                        <td>${pacote.valor}</td>
                         <td>${pacote.descricao}</td>
-                        <td><a href="/<%= contextPath%>/livros/edicao?id=${livro.id}">Edição</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp; <a
-                            href="/<%= contextPath%>/livros/remocao?id=${livro.id}"
-                            onclick="return confirm('Tem certeza de que deseja excluir este item?');">
-                                Remoção </a></td>
+                        
                     </tr>
                 </c:forEach>
             </table>

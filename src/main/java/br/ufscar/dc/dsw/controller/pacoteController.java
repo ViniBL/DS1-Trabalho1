@@ -5,7 +5,7 @@ import br.ufscar.dc.dsw.dao.AgenciaDAO;
 import br.ufscar.dc.dsw.dao.DestinoDAO;
 import br.ufscar.dc.dsw.domain.pacote;
 import br.ufscar.dc.dsw.domain.agencia;
-import br.ufscar.dc.dsw.domain.Usuario;
+//import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.domain.destino;
 
 import java.io.IOException;
@@ -91,18 +91,19 @@ public class pacoteController extends HttpServlet {
         }
         return agencias;
     }
-
+    /*
     private Map<Long, String> getDestinos() {
         Map <Long,String> destinos = new HashMap<>();
         for (destino destino: new DestinoDAO().getAll()) {
-            agencias.put(agencia.getId_agencia(), agencia.getNome());
+            destinos.put(destino.getId_destino(), destino.getCidade());
         }
-        return agencias;
+        return destinos;
     }
-    
+    */
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("agencias", getAgencias());
+        //request.setAttribute(name: "destinos", getDestinos());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/pacote/formulario.jsp");
         dispatcher.forward(request, response);
     }
@@ -110,10 +111,10 @@ public class pacoteController extends HttpServlet {
     private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        Livro livro = dao.get(id);
-        request.setAttribute("livro", livro);
-        request.setAttribute("editoras", getEditoras());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/livro/formulario.jsp");
+        pacote pacote = dao.get(id);
+        request.setAttribute("pacote", pacote);
+        request.setAttribute("agencias", getAgencias());
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/pacote/formulario.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -121,44 +122,48 @@ public class pacoteController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         
-        String titulo = request.getParameter("titulo");
-        String autor = request.getParameter("autor");
-        Integer ano = Integer.parseInt(request.getParameter("ano"));
-        Float preco = Float.parseFloat(request.getParameter("preco"));
+        String data_partida = request.getParameter("data_partida");
+        String descricao = request.getParameter("descricao");
+        Integer duracao = Integer.parseInt(request.getParameter("duracao"));
+        Float valor = Float.parseFloat(request.getParameter("valor"));
         
-        Long editoraID = Long.parseLong(request.getParameter("editora"));
-        Editora editora = new EditoraDAO().get(editoraID);
+        Long agenciaId = Long.parseLong(request.getParameter("agenciaId"));
+        agencia agencia = new AgenciaDAO().get(agenciaId);
+        Long destinoId = Long.parseLong(request.getParameter("destinoId"));
+        destino destino = new DestinoDAO().get(destinoId);
         
-        Livro livro = new Livro(titulo, autor, ano, preco, editora);
-        dao.insert(livro);
-        response.sendRedirect("lista");
+        pacote pacote = new pacote(data_partida, duracao, valor, descricao, agencia, destino);
+        dao.insert(pacote);
+        response.sendRedirect("login");
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-        Long id = Long.parseLong(request.getParameter("id"));
-        String titulo = request.getParameter("titulo");
-        String autor = request.getParameter("autor");
-        Integer ano = Integer.parseInt(request.getParameter("ano"));
-        Float preco = Float.parseFloat(request.getParameter("preco"));
+        Long id_pacote = Long.parseLong(request.getParameter("id_pacote"));
+        String data_partida = request.getParameter("data_partida");
+        String descricao = request.getParameter("descricao");
+        Integer duracao = Integer.parseInt(request.getParameter("duracao"));
+        Float valor = Float.parseFloat(request.getParameter("valor"));
         
-        Long editoraID = Long.parseLong(request.getParameter("editora"));
-        Editora editora = new EditoraDAO().get(editoraID);
+        Long agenciaId = Long.parseLong(request.getParameter("agenciaId"));
+        agencia agencia = new AgenciaDAO().get(agenciaId);
+        Long destinoId = Long.parseLong(request.getParameter("destinoId"));
+        destino destino = new DestinoDAO().get(destinoId);
         
-        Livro livro = new Livro(id, titulo, autor, ano, preco, editora);
-        dao.update(livro);
-        response.sendRedirect("lista");
+        pacote pacote = new pacote(id_pacote, data_partida, duracao, valor, descricao, agencia, destino);
+        dao.insert(pacote);
+        response.sendRedirect("login");
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
+        Long id_pacote = Long.parseLong(request.getParameter("id_pacote"));
 
-        Livro livro = new Livro(id);
-        dao.delete(livro);
-        response.sendRedirect("lista");
+        pacote pacote = new pacote(id_pacote);
+        dao.delete(pacote);
+        response.sendRedirect("login");
     }
     
 }
