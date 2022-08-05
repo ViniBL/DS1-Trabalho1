@@ -47,7 +47,8 @@ public class pacoteDAO extends GenericDAO {
 
     	List<pacote>  listaPacotes = new ArrayList<>();
 
-        String sql = "SELECT * from pacote p, agencia a, destino d where p.AGENCIA_ID_AGENCIA = a.ID_AGENCIA, p.DESTINO_ID_DESTINO = d.ID_DESTINO order by p.id_pacote";
+        //String sql = "SELECT * from pacote p, agencia a, destino d where p.ID_AGENCIA = a.ID_AGENCIA, p.ID_DESTINO = d.ID_DESTINO order by p.id_pacote";
+        String sql = "SELECT * from pacote p";
 
         try {
             Connection conn = this.getConnection();
