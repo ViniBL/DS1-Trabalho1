@@ -62,7 +62,7 @@ create table Pacote(
   id_pacote bigint not null auto_increment,
   id_agencia bigint not null,
   id_destino bigint not null,
-  data_partida date not null,
+  data_partida varchar(10) not null,
   duracao int not null,
   valor decimal(6,2) not null,
   descricao varchar(256) not null,
