@@ -11,7 +11,7 @@ import java.util.List;
 import br.ufscar.dc.dsw.domain.pacote;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.domain.agencia;
-import br.ufscar.dc.dsw.domain.destino;
+import br.ufscar.dc.dsw.domain.destino; 
 
 public class pacoteDAO extends GenericDAO {
 
@@ -133,7 +133,7 @@ public class pacoteDAO extends GenericDAO {
                agencia agencia =  new AgenciaDAO().get(agenciaId);
                destino destino = new DestinoDAO().get(destinoId);
 
-               pacote = new pacote(id_pacote, data_partida, duracao, valor, descricao, ag, dest);
+               pacote = new pacote(id_pacote, data_partida, duracao, valor, descricao, agencia, destino);
            }
        
 
