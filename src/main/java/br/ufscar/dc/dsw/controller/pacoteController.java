@@ -68,9 +68,6 @@ public class pacoteController extends HttpServlet {
                     lista(request, response);
                     break;
             }
-            
-            //lista(request, response);
-            
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
@@ -80,7 +77,7 @@ public class pacoteController extends HttpServlet {
             throws ServletException, IOException {
         List<pacote> listaPacotes = dao.getAll();
         request.setAttribute("listaPacotes", listaPacotes);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/webapp/login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/pacote/lista.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -110,7 +107,7 @@ public class pacoteController extends HttpServlet {
 
     private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
+        Long id = Long.parseLong(request.getParameter("id_usuario"));
         pacote pacote = dao.get(id);
         request.setAttribute("pacote", pacote);
         request.setAttribute("agencias", getAgencias());
@@ -134,7 +131,7 @@ public class pacoteController extends HttpServlet {
         
         pacote pacote = new pacote(data_partida, duracao, valor, descricao, agencia, destino);
         dao.insert(pacote);
-        response.sendRedirect("login");
+        response.sendRedirect("lista");
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response)
@@ -154,7 +151,7 @@ public class pacoteController extends HttpServlet {
         
         pacote pacote = new pacote(id_pacote, data_partida, duracao, valor, descricao, agencia, destino);
         dao.insert(pacote);
-        response.sendRedirect("login");
+        response.sendRedirect("lista");
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response)
@@ -163,7 +160,7 @@ public class pacoteController extends HttpServlet {
 
         pacote pacote = new pacote(id_pacote);
         dao.delete(pacote);
-        response.sendRedirect("login");
+        response.sendRedirect("lista");
     }
     
 }

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Autenticação de Usuário</title>
     </head>
@@ -36,37 +36,6 @@
                     </td>
                 </tr>
             </table>
-        <%
-		    String contextPath = request.getContextPath().replace("/", "");
-	    %>
-	    <div align="center">
-		    <h1>Pacotes de Viagens Disponíveis</h1>
-           
-	    </div>
-
-	    <div align="center">
-		    <table border="1">
-			    <caption>Lista de Pacotes</caption>
-			    <tr>
-                    <th>Nome da Agência</th>
-                    <th>Destino</th>
-                    <th>Data de Partida</th>
-                    <th>Duração da Viagem</th>
-                    <th>Valor</th>
-                    <th>Descrição</th>
-                </tr>
-                <c:forEach var="pacote" items="${requestScope.listaPacotes}">
-                    <tr>
-                        <td>${pacote.agencia.nome}</td>
-                        <td>${pacote.destino.cidade}</td>
-                        <td>${pacote.data_partida}</td>
-                        <td>${pacote.duracao}</td>
-                        <td>${pacote.valor}</td>
-                        <td>${pacote.descricao}</td>
-                        
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
+        <a href="pacotes">Lista Pacotes</a>
     </body>
 </html>
