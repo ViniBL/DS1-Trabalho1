@@ -17,6 +17,33 @@
            
 	    </div>
 
+        <div>
+            <form name="selecaoFiltro" action="Selecionar Filtro" method="POST">
+                <label>Filtrar por: </label>
+                <select name="filtro">
+                    <option value="destino">Descrição</option>
+                    <option value="agencia">Nome da Agência</option>
+                    <option value="data_partida">Data de Partida</option>
+                </select>
+                <% if(request.getParameter("filtro") == "destino"){%>
+                    <label>Cidade</label>
+                    <input type="text" maxlength=50 name="cidade">
+                    <label>Estado</label>
+                    <input type="text" maxlength=50 name="estado">
+                    <label>Pais</label>
+                    <input type="text" maxlength=50 name="pais">
+                <%}%>
+                <% if(request.getParameter("filtro") == "agencia"){%>
+                    <label>Nome</label>
+                    <input type="text" maxlength=50 name="nome">
+                <%}%>
+                <% if(request.getParameter("filtro") == "data_partida"){%>
+                    <label>DD-MM-YYYY</label>
+                    <input type="text" maxlength=50 name="data_partida">
+                <%}%>
+            </form>
+        </div>
+
 	    <div align="center">
 		    <table border="1">
 			    <caption>Lista de Pacotes</caption>
