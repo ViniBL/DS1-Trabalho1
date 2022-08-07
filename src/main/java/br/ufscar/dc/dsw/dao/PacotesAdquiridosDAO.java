@@ -116,7 +116,7 @@ public class PacotesAdquiridosDAO extends GenericDAO {
                Long pacoteId = resultSet.getLong("id_pacote");
                Long clienteId = resultSet.getLong("id_cliente");
 
-               pacote pacote = new PacoteDAO().get(pacoteId);
+               pacote pacote = new pacoteDAO().get(pacoteId);
                cliente cliente = new ClienteDAO().get(clienteId);
 
                pacote_adquirido = new pacotes_adquiridos(id_pacote_adquirido, status, cliente, pacote);

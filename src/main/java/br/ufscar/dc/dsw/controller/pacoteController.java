@@ -9,8 +9,10 @@ import br.ufscar.dc.dsw.domain.agencia;
 import br.ufscar.dc.dsw.domain.destino;
 
 import java.io.IOException;
+//import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -73,12 +75,34 @@ public class pacoteController extends HttpServlet {
         }
     }
 
+   
     private void lista(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<pacote> listaPacotes = dao.getAll();
+        List<pacote> listaPacotes = new ArrayList<>();
+        String cidade = request.getParameter("cidade");
+        String nomeAgencia = request.getParameter("nome");
+        String dataPartida = request.getParameter("data_partida");
+        
+        if(request.getParameter("cidade") != null){
+            listaPacotes.add(dao.getbyDestino(request.getParameter("cidade")));
+        }
+        else if(request.getParameter("nome") != null){
+            listaPacotes = dao.getbyAgencia(nomeAgencia);
+            //request.setAttribute("listaPacotes", listaPacotes);
+        }
+        else if(request.getParameter("data_partida") != null){
+           
+            listaPacotes = dao.getbyData_partida(dataPartida);
+            //request.setAttribute("listaPacotes", listaPacotes);
+        }
+        else if(cidade == null && nomeAgencia == null && dataPartida == null){
+            listaPacotes = dao.getAll();
+            //request.setAttribute("listaPacotes", listaPacotes);
+        }
         request.setAttribute("listaPacotes", listaPacotes);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/pacote/lista.jsp");
         dispatcher.forward(request, response);
+        
     }
 
     private Map<Long, String> getAgencias() {
@@ -131,7 +155,7 @@ public class pacoteController extends HttpServlet {
         
         pacote pacote = new pacote(data_partida, duracao, valor, descricao, agencia, destino);
         dao.insert(pacote);
-        response.sendRedirect("lista");
+        response.sendRedirect("lista.jsp");
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response)
@@ -151,7 +175,7 @@ public class pacoteController extends HttpServlet {
         
         pacote pacote = new pacote(id_pacote, data_partida, duracao, valor, descricao, agencia, destino);
         dao.insert(pacote);
-        response.sendRedirect("lista");
+        response.sendRedirect("lista.jsp");
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response)
@@ -160,7 +184,7 @@ public class pacoteController extends HttpServlet {
 
         pacote pacote = new pacote(id_pacote);
         dao.delete(pacote);
-        response.sendRedirect("lista");
+        response.sendRedirect("lista.jsp");
     }
     
 }

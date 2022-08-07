@@ -12,35 +12,38 @@
         <%
 		    String contextPath = request.getContextPath().replace("/", "");
 	    %>
+        <a href="/Login">Login</a>
 	    <div align="center">
 		    <h1>Pacotes de Viagens Disponíveis 2.1</h1>
            
 	    </div>
 
         <div>
-            <form name="selecaoFiltro" action="Selecionar Filtro" method="POST">
-                <label>Filtrar por: </label>
-                <select name="filtro">
-                    <option value="destino">Descrição</option>
+            <form action="/Login/pacote/lista.jsp" method="POST">
+                <label>Filtrar por: </label> <br/>
+                <!--<select id="filter" name="filtro">
+                    <option value="destino">Destino (Ex.: 'Cidade/Estado/Pais')</option>
                     <option value="agencia">Nome da Agência</option>
-                    <option value="data_partida">Data de Partida</option>
-                </select>
-                <% if(request.getParameter("filtro") == "destino"){%>
+                    <option value="data_partida">Data de Partida (Ex.: 'DD-MM-YYYY')</option>
+                </select>-->
+                
+                
                     <label>Cidade</label>
-                    <input type="text" maxlength=50 name="cidade">
+                    <input type="text" maxlength=50 name="cidade"> <br/>
                     <label>Estado</label>
-                    <input type="text" maxlength=50 name="estado">
+                    <input type="text" maxlength=50 name="estado"> <br/>
                     <label>Pais</label>
-                    <input type="text" maxlength=50 name="pais">
-                <%}%>
-                <% if(request.getParameter("filtro") == "agencia"){%>
-                    <label>Nome</label>
-                    <input type="text" maxlength=50 name="nome">
-                <%}%>
-                <% if(request.getParameter("filtro") == "data_partida"){%>
-                    <label>DD-MM-YYYY</label>
-                    <input type="text" maxlength=50 name="data_partida">
-                <%}%>
+                    <input type="text" maxlength=50 name="pais"> <br/>
+                
+               
+                    <label>Nome da Agência</label>
+                    <input type="text" maxlength=50 name="nome"> <br/>
+               
+               
+                    <label>Data (DD-MM-YYYY)</label>
+                    <input type="text" maxlength=50 name="data_partida"> <br/>
+               
+                <input type="submit" value="Buscar">
             </form>
         </div>
 

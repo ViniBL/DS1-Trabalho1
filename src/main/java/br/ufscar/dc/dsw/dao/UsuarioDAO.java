@@ -46,7 +46,7 @@ public class UsuarioDAO extends GenericDAO {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                long id = resultSet.getLong("id");
+                long id = resultSet.getLong(1);
                 String nome = resultSet.getString("nome");
                 String login = resultSet.getString("login");
                 String senha = resultSet.getString("senha");
