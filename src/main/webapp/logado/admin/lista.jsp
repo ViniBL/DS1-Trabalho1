@@ -10,6 +10,7 @@
     <body>
         <%
 		    String contextPath = request.getContextPath().replace("/", "");
+            
         %>
         <div align="center">
             <h1>Cliente Cadastrados</h1>
@@ -38,9 +39,10 @@
                         <td>${cliente.cpf}</td>
                         <td>${cliente.data_nascimento}</td>
                         <td>${cliente.telefone}</td>
-                        <td><a href="/<%= contextPath%>/admin/clientes/edicao?id=${cliente.id_cliente}">Edição</a>
+                        <td><a href="/<%= contextPath%>/admin/clientes/edicao?id_cliente=${cliente.id_cliente}">Edição</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="/<%= contextPath%>/admin/clientes/remocao?id=${cliente.id_cliente}" onclick="return confirm('Tem certeza de que deseja excluir este item?');">Remoção </a></td>
+                            <a href="/<%= contextPath%>/admin/clientes/remocao?id_cliente=${cliente.id_cliente}" onclick="return confirm('Tem certeza de que deseja excluir este item?');">Remoção </a></td>
+                        
                     </tr>
                 </c:forEach>
             </table>

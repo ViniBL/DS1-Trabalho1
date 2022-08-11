@@ -15,17 +15,18 @@
 		</c:choose>
 	</caption>
 	<c:if test="${cliente != null}">
-		<input type="hidden" name="id" value="${cliente.id_cliente}" />
+		<input type="hidden" name="id_cliente" value="${cliente.id_cliente}" />
+		<input type="hidden" name="id_usuario" value="${usuario.id}" />
 	</c:if>
 	<tr>
 		<td><label for="email">Email</label></td>
 		<td><input type="text" id="email" name="email" size="45"
-			required vlue="${cliente.usuario.login}" /></td>
+			required vlue="${usuario.login}" /></td>
 	</tr>
 	<tr>
 		<td><label for="senha">Senha</label></td>
 		<td><input type="password" id="senha" name="senha" size="45"
-			required vlue="${cliente.usuario.senha}" /></td>
+			required vlue="${usuario.senha}" /></td>
 	</tr>
 	<tr>
 		<td><label for="cpf">CPF</label></td>
@@ -35,7 +36,7 @@
 	<tr>
 		<td><label for="nome">Nome</label></td>
 		<td><input type="text" id="nome" name="nome" size="45"
-			required vlue="${cliente.usuario.login}" /></td>
+			required vlue="${usuario.nome}" /></td>
 	</tr>
 	<tr>
 		<td><label for="telefone">Telefone</label></td>
@@ -60,10 +61,10 @@
 	</tr>
 	<tr>
 		<td><label for="data_nascimento">Data de Nascimento</label></td>
-		<td><input type="text" id="data_nascimento" name="nascimento" required
-			size="10" value="${cliente.data_nascimento}" /></td>
+		<td><input type="text" id="data_nascimento" name="data_nascimento" required
+			size="45" value="${cliente.data_nascimento}" /></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center"><input type="submit" value="Salva" /></td>
+		<td colspan="2" align="center"><input type="submit" value="Salvar" /></td>
 	</tr>
 </table>

@@ -20,6 +20,11 @@ public class UsuarioController extends HttpServlet {
 
 	private UsuarioDAO dao;
 
+	@Override
+	public void init(){
+		dao = new UsuarioDAO();
+	}
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -62,4 +67,17 @@ public class UsuarioController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/pacote/lista.jsp");
         dispatcher.forward(request, response);
     }
+
+	public void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id_usuario"));
+        //String login = request.getParameter("email");
+        //cliente cliente = dao.get(id);
+        Usuario usuario = dao.getbyID(id);
+        request.setAttribute("usuario", usuario);
+        //request.setAttribute("Usuario", usuario);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/formulario.jsp");
+        dispatcher.forward(request, response);
+    }
 }
+

@@ -12,7 +12,7 @@ insert into Usuario(nome, login, senha, papel) values ('Usuario', 'user', 'user'
 
 insert into Usuario(nome, login, senha, papel) values ('Agencia', 'agencia', 'agencia', 'AGENCIA');
 
-create table Cliente(id_cliente bigint not null auto_increment, id_usuario bigint not null, cpf varchar(11) not null unique, telefone varchar(14) not null, sexo varchar(1) not null, data_nascimento varchar(10) not null, primary key (id_cliente), foreign key (id_usuario) references Usuario(id_usuario), CONSTRAINT sexo_check CHECK (sexo IN('M', 'F', 'N')));
+create table Cliente(id_cliente bigint not null auto_increment, id_usuario bigint not null, cpf varchar(11) not null unique, telefone varchar(14) not null, sexo varchar(1) not null, data_nascimento varchar(20) not null, primary key (id_cliente), foreign key (id_usuario) references Usuario(id_usuario), CONSTRAINT sexo_check CHECK (sexo IN('M', 'F', 'N')));
 
 create table Agencia(id_agencia bigint not null auto_increment,id_usuario bigint not null,nome varchar(256) not null,cnpj varchar(18) not null unique,descricao varchar(256) not null,primary key (id_agencia),foreign key (id_usuario) references Usuario(id_usuario));
 
@@ -52,9 +52,9 @@ insert into Pacotes_adquiridos(id_cliente, id_pacote, status) values (1, 1, 'ADQ
 
 insert into Pacotes_adquiridos(id_cliente, id_pacote, status) values (1, 2, 'ADQUIRIDO');
 
-SELECT * from Pacote p, Agencia a, Destino d, Usuario u where p.id_agencia = a.id_agencia and p.id_destino = d.id_destino and a.id_usuario= u.id_usuario and d.cidade="São Carlos" order by p.id_pacote;
+/*SELECT * from Pacote p, Agencia a, Destino d, Usuario u where p.id_agencia = a.id_agencia and p.id_destino = d.id_destino and a.id_usuario= u.id_usuario and d.cidade="São Carlos" order by p.id_pacote;
 
-/*
+
 select * from Usuario;
 select * from Cliente;
 select * from Agencia;
