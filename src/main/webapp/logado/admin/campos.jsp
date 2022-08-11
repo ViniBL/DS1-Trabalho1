@@ -13,31 +13,31 @@
                             Cadastro
                         </c:otherwise>
 		</c:choose>
-	</caption>
+	</caption>	
 	<c:if test="${cliente != null}">
-		<input type="hidden" name="id_cliente" value="${cliente.id_cliente}" />
-		<input type="hidden" name="id_usuario" value="${usuario.id}" />
+		<input type="hidden" name="id_cliente" value="${cliente.id}" />
 	</c:if>
 	<tr>
-		<td><label for="email">Email</label></td>
-		<td><input type="text" id="email" name="email" size="45"
-			required vlue="${usuario.login}" /></td>
+		<td><label for="nome">Nome</label></td>
+		<td><input type="text" id="nome" name="nome" size="45"
+			required value="${cliente.nome}" /></td>
+	</tr>
+	<tr>
+		<td><label for="login">Email</label></td>
+		<td><input type="text" id="login" name="login" size="45"
+			required value="${cliente.login}" /></td>
 	</tr>
 	<tr>
 		<td><label for="senha">Senha</label></td>
 		<td><input type="password" id="senha" name="senha" size="45"
-			required vlue="${usuario.senha}" /></td>
+			required value="${cliente.senha}" /></td>
 	</tr>
 	<tr>
 		<td><label for="cpf">CPF</label></td>
 		<td><input type="text" id="cpf" name="cpf" size="45"
 			required value="${cliente.cpf}" /></td>
 	</tr>
-	<tr>
-		<td><label for="nome">Nome</label></td>
-		<td><input type="text" id="nome" name="nome" size="45"
-			required vlue="${usuario.nome}" /></td>
-	</tr>
+	
 	<tr>
 		<td><label for="telefone">Telefone</label></td>
 		<td><input type="text" id="telefone" name="telefone" size="45" required

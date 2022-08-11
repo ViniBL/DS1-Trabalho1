@@ -12,8 +12,9 @@
 		    String contextPath = request.getContextPath().replace("/", "");
             
         %>
+        <a href="/Login/admin/">Voltar</a>
         <div align="center">
-            <h1>Cliente Cadastrados</h1>
+            <h1>Clientes Cadastrados</h1>
             <h2>
                 <a href="/<%=contextPath%>/admin/clientes/cadastro">Adicione Novo Cliente</a>
             </h2>
@@ -33,15 +34,15 @@
                 </tr>
                 <c:forEach var="cliente" items="${requestScope.listaClientes}">
                     <tr>
-                        <td>${cliente.id_cliente}</td>
-                        <td>${cliente.usuario.nome}</td>
+                        <td>${cliente.id}</td>
+                        <td>${cliente.nome}</td>
                         <td>${cliente.sexo}</td>
                         <td>${cliente.cpf}</td>
                         <td>${cliente.data_nascimento}</td>
                         <td>${cliente.telefone}</td>
-                        <td><a href="/<%= contextPath%>/admin/clientes/edicao?id_cliente=${cliente.id_cliente}">Edição</a>
+                        <td><a href="/<%= contextPath%>/admin/clientes/edicao?id_cliente=${cliente.id}">Edição</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="/<%= contextPath%>/admin/clientes/remocao?id_cliente=${cliente.id_cliente}" onclick="return confirm('Tem certeza de que deseja excluir este item?');">Remoção </a></td>
+                            <a href="/<%= contextPath%>/admin/clientes/remocao?id_cliente=${cliente.id}" onclick="return confirm('Tem certeza de que deseja excluir este item?');">Remoção </a></td>
                         
                     </tr>
                 </c:forEach>

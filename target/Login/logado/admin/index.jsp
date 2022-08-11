@@ -12,6 +12,7 @@
         
         <p>Olá ${sessionScope.usuarioLogado.nome}</p>
         <a href="clientes">Lista de Clientes</a>
+        <a href="agencias">Lista de Agencias</a>
         <ul>
             <li>
                
