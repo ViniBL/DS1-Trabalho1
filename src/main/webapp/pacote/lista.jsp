@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="java.util.List,br.ufscar.dc.dsw.dao.DestinoDAO,br.ufscar.dc.dsw.dao.AgenciaDAO,br.ufscar.dc.dsw.dao.pacoteDAO,br.ufscar.dc.dws.domain.pacote,br.ufscar.dc.dsw.domain.agencia,br.ufscar.dc.dsw.domain.destino" %>
+<%@ page import="java.util.List, imports.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +25,7 @@
                     <option value="destino">Destino (Ex.: 'Cidade/Estado/Pais')</option>
                     <%
                     DestinoDAO dDao= new DestinoDAO();
-                    List<destino>destinos = dDao.getAll();
+                    List<destino> destinos = dDao.getAll();
                     for(destino d : destinos){
                     %>
                     <option><%=d.getEstado() %></option>
@@ -35,7 +35,7 @@
                     <option value="agencia">Nome da Agência</option>
                     <%
                     AgenciaDAO aDao= new AgenciaDAO();
-                    List<agencia>agencias = aDao.getAll();
+                    List<agencia> agencias = aDao.getAll();
                     for(agencia a : agencias){
                     %>
                     <option><%=a.getNome() %></option>
@@ -45,7 +45,7 @@
                     <option value="data_partida">Data de Partida (Ex.: 'DD-MM-YYYY')</option>
                     <%
                     pacoteDAO pDao= new pacoteDAO();
-                    List<pacote>pacotes = pDao.getAll();
+                    List<pacote> pacotes = pDao.getAll();
                     for(pacote p : pacotes){
                     %>
                     <option><%=p.getData_partida() %></option>
