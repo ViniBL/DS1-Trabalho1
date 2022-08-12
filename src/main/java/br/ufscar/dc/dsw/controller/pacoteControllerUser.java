@@ -78,6 +78,7 @@ public class pacoteControllerUser extends HttpServlet {
                     break;
                 case "/erro":
                     erroCompra(request, response);
+                    break;
                 default:
                     lista(request, response);
                     break;
@@ -97,6 +98,7 @@ public class pacoteControllerUser extends HttpServlet {
         dispatcher.forward(request, response);
         
     }
+
 
     private Map<Long, String> getAgencias() {
         Map <Long,String> agencias = new HashMap<>();

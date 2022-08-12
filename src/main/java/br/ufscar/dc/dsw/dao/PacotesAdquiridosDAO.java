@@ -49,7 +49,7 @@ public class PacotesAdquiridosDAO extends GenericDAO {
 
     	List<pacotes_adquiridos>  listaPacotes_adquiridos = new ArrayList<>();
 
-        String sql = "SELECT * from Pacotes_adquiridos p where p.id_usuario=?";
+        String sql = "SELECT * from Pacotes_adquiridos where id_usuario=?";
 
         try {
             Connection conn = this.getConnection();

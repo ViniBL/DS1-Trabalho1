@@ -26,10 +26,7 @@ public class pacotes_adquiridos {
 		this.pacote = pacote;
 	}
 
-	public pacotes_adquiridos(Long id, Float valorProposta){
-		this.id_pacote_adquirido = id;
-		this.valorProposta = valorProposta;
-	}
+	
 
 	public Long getId_pacote_adquirido() {
 		return id_pacote_adquirido;
