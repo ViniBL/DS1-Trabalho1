@@ -21,11 +21,36 @@
         <div>
             <form action="/Login/pacote/lista.jsp" method="POST">
                 <label>Filtrar por: </label> <br/>
-                <!--<select id="filter" name="filtro">
+                <select id="filter_destino" name="filtro">
                     <option value="destino">Destino (Ex.: 'Cidade/Estado/Pais')</option>
+                    <%
+                    DestinoDAO dDao= new DestinoDAO();
+                    List<destino>destinos = dDao.getAll();
+                    for(destino d : destinos){
+                    %>
+                    <option><%=d.getEstado(); %></option>
+                    <% } %> 
+                </select>
+                <select id="filter_agencia" name="filtro">
                     <option value="agencia">Nome da Agência</option>
+                    <%
+                    AgenciaDAO aDao= new AgenciaDAO();
+                    List<agencia>agencias = aDao.getAll();
+                    for(agencia a : agencias){
+                    %>
+                    <option><%=a.getNome(); %></option>
+                    <% } %> 
+                </select>
+                <select id="filter_data" name="filtro">  
                     <option value="data_partida">Data de Partida (Ex.: 'DD-MM-YYYY')</option>
-                </select>-->
+                    <%
+                    pacoteDAO pDao= new pacoteDAO();
+                    List<pacote>pacotes = pDao.getAll();
+                    for(pacote p : pacotes){
+                    %>
+                    <option><%=p.getData_partida(); %></option>
+                    <% } %> 
+                </select>
                 
                 
                     <label>Cidade</label>
