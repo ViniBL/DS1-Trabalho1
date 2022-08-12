@@ -113,7 +113,7 @@ public class pacoteControllerUser extends HttpServlet {
     */
     private void apresentaFormCompra(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/usuario/fomulario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/usuario/formulario.jsp");
         dispatcher.forward(request, response);
     }
 
