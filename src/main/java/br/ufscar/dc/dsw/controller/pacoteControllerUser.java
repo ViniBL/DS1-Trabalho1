@@ -113,7 +113,7 @@ public class pacoteControllerUser extends HttpServlet {
     */
     private void apresentaFormCompra(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id_agencia"));
+        Long id = Long.parseLong(request.getParameter("id_pacote"));
         pacote pacote = dao.get(id);
         request.setAttribute("pacote", pacote);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/usuario/formulario.jsp");

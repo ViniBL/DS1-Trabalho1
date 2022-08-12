@@ -14,7 +14,7 @@ public class DestinoDAO extends GenericDAO {
 
     public void insert(destino destino)
     {
-        String sql = "INSERT INTO destino (cidade, estado, pais) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Destino (cidade, estado, pais) VALUES (?, ?, ?)";
 
         try
         {
@@ -68,7 +68,7 @@ public class DestinoDAO extends GenericDAO {
 
 
     public void update(destino destino) {
-        String sql = "UPDATE destino SET cidade = ?, estado = ?, pais = ? WHERE id_destino = ?";
+        String sql = "UPDATE Destino SET cidade = ?, estado = ?, pais = ? WHERE id_destino = ?";
 
         try {
             Connection conn = this.getConnection();
@@ -89,7 +89,7 @@ public class DestinoDAO extends GenericDAO {
 
     public void delete(destino destino)
     {
-       String sql = "DELETE FROM destino where id_destino = ?";
+       String sql = "DELETE FROM Destino where id_destino = ?";
 
        try {
            Connection conn = this.getConnection();
@@ -108,7 +108,7 @@ public class DestinoDAO extends GenericDAO {
    public destino get(Long id_destino) {
         destino destino = null;
 
-        String sql = "SELECT * from destino WHERE id_destino = ?";
+        String sql = "SELECT * from Destino WHERE id_destino = ?";
 
         try {
             Connection conn = this.getConnection();

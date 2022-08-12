@@ -255,7 +255,7 @@ public class pacoteDAO extends GenericDAO {
                float valor = resultSet.getFloat("valor");
                String descricao =  resultSet.getString("descricao");
 
-               Long agenciaId = resultSet.getLong("id_agencia");
+               Long agenciaId = resultSet.getLong("id_usuario");
                Long destinoId = resultSet.getLong("id_destino");
                Usuario agencia =  new UsuarioDAO().getAgenciaByID(agenciaId);
                destino destino = new DestinoDAO().get(destinoId);
