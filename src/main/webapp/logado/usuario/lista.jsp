@@ -18,34 +18,7 @@
            
 	    </div>
 
-        <div>
-            <form action="/Login/pacote/lista.jsp" method="POST">
-                <label>Filtrar por: </label> <br/>
-                <!--<select id="filter" name="filtro">
-                    <option value="destino">Destino (Ex.: 'Cidade/Estado/Pais')</option>
-                    <option value="agencia">Nome da Agência</option>
-                    <option value="data_partida">Data de Partida (Ex.: 'DD-MM-YYYY')</option>
-                </select>-->
-                
-                
-                    <label>Cidade</label>
-                    <input type="text" maxlength=50 name="cidade"> <br/>
-                    <label>Estado</label>
-                    <input type="text" maxlength=50 name="estado"> <br/>
-                    <label>Pais</label>
-                    <input type="text" maxlength=50 name="pais"> <br/>
-                
-               
-                    <label>Nome da Agência</label>
-                    <input type="text" maxlength=50 name="nome"> <br/>
-               
-               
-                    <label>Data (DD-MM-YYYY)</label>
-                    <input type="text" maxlength=50 name="data_partida"> <br/>
-               
-                <input type="submit" value="Buscar">
-            </form>
-        </div>
+        
 
 	    <div align="center">
 		    <table border="1">
@@ -66,12 +39,7 @@
                         <td>${pacote.duracao} dias</td>
                         <td>R$${pacote.valor}</td>
                         <td>${pacote.descricao}</td>
-                        <td><a href="/<%= contextPath%>/usuario/pacotes/proposta?id_pacote=${pacote.id}">Comprar</a>
-                        <!--<td>${usuario.id}</td>
-                        <td>${usuario.nome}</td>
-                        <td>${usuario.login}</td>
-                        <td>${usuario.senha}</td>
-                        <td>${usuario.papel}</td>-->
+                        <td><a href="/<%= contextPath%>/usuario/pacotes/proposta?id_pacote=${pacote.id_pacote}">Comprar</a>
                         
                     </tr>
                 </c:forEach>
