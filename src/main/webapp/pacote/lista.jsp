@@ -60,7 +60,7 @@
                 </tr>
                 <c:forEach var="pacote" items="${requestScope.listaPacotes}">
                     <tr>
-                        <td>${pacote.agencia.nome}</td>
+                        <td>${pacote.usuario.nome}</td>
                         <td>${pacote.destino.cidade} - ${pacote.destino.estado}/${pacote.destino.pais}</td>
                         <td>${pacote.data_partida}</td>
                         <td>${pacote.duracao} dias</td>

@@ -1,45 +1,15 @@
 package br.ufscar.dc.dsw.domain;
-/* 
-import java.io.Serializable;
-//import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-//import javax.xml.bind.annotation.XmlID;
 
-@Entity
-@Table(name = "Pacote")
-@NamedQueries({
-	@NamedQuery(name = "Pacote.getAll", query = "SELECT * FROM Pacote p"),
-	@NamedQuery(name = "Pacote.getbyDestino", query = "SELCT * FROM Pacote p where p.destino=:destino"),
-	@NamedQuery(name = "Pacote.getbyAgencia", query = "SELCT * FROM Pacote p where p.agencia=:nomeAgencia"),
-	@NamedQuery(name = "Pacote.getbyData_partida", query = "SELCT * FROM Pacote p where p.data_partida=:dataPartida")
-})
 
-*/
+
 public class pacote{
 
-	//private static final long serialVersionUID = 1L;
-	//@Id
-	//@Basic(optional = false)
-	//@Column(name = "id_pacote")
 	private Long id_pacote;
-	//@Column(name = "data_partida")
 	private String data_partida;
-	//@Column(name = "duracao")
 	private int duracao;
-	//@Column(name = "valor")
 	private Float valor;
-	//@Column(name = "descricao")
 	private String descricao;
-	//@OneToMany(mappedBy = "Agencia")
-	private agencia agencia;
-	//@OneToMany(mappedBy = "Destino")
+	private Usuario usuario;
 	private destino destino;
 
 	public pacote(Long id_pacote){
@@ -47,18 +17,18 @@ public class pacote{
 	}
 	
 	public pacote(String data_partida, int duracao, Float valor, String descricao,
-			agencia agencia, destino destino) {
+			Usuario usuario, destino destino) {
 		this.data_partida = data_partida;
 		this.duracao = duracao;
 		this.valor = valor;
 		this.descricao = descricao;
-		this.agencia = agencia;
+		this.usuario = usuario;
 		this.destino = destino;
 	}
 
 	public pacote(Long id_pacote, String data_partida, int duracao, Float valor, String descricao,
-			agencia agencia, destino destino){
-		this(data_partida, duracao, valor, descricao, agencia, destino);
+			Usuario usuario, destino destino){
+		this(data_partida, duracao, valor, descricao, usuario, destino);
 		this.id_pacote = id_pacote;
 
 	}
@@ -104,12 +74,12 @@ public class pacote{
 	}
 	
 	
-	public agencia getAgencia() {
-		return agencia;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 	
-	public void setAgencia(agencia agencia) {
-		this.agencia = agencia;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	public destino getDestino() {

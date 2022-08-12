@@ -16,6 +16,7 @@
 /home/enio/eclipse-workspace/DS1-Trabalho1/src/main/java/br/ufscar/dc/dsw/dao/GenericDAO.java
 /home/enio/eclipse-workspace/DS1-Trabalho1/src/main/java/br/ufscar/dc/dsw/controller/IndexController.java
 /home/enio/eclipse-workspace/DS1-Trabalho1/src/main/java/br/ufscar/dc/dsw/domain/cliente.java
+/home/enio/eclipse-workspace/DS1-Trabalho1/src/main/java/br/ufscar/dc/dsw/controller/pacoteControllerUser.java
 /home/enio/eclipse-workspace/DS1-Trabalho1/src/main/java/br/ufscar/dc/dsw/dao/pacoteDAO.java
 /home/enio/eclipse-workspace/DS1-Trabalho1/src/main/java/br/ufscar/dc/dsw/dao/AgenciaDAO.java
 /home/enio/eclipse-workspace/DS1-Trabalho1/src/main/java/br/ufscar/dc/dsw/domain/destino.java

@@ -62,7 +62,7 @@ public class UsuarioController extends HttpServlet {
 
 	private void lista(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Usuario> listaUsuarios = dao.getAll();
+        List<Usuario> listaUsuarios = dao.getAllAdm();
         request.setAttribute("listaUsuarios", listaUsuarios);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/pacote/lista.jsp");
         dispatcher.forward(request, response);

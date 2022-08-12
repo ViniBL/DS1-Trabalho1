@@ -23,15 +23,16 @@ public class PacotesAdquiridosDAO extends GenericDAO {
 
     public void insert(pacotes_adquiridos pacote_adquirido)
     {
-        String sql = "INSERT INTO Pacotes_adquiridos (id_cliente, id_pacote) VALUES (?, ?)";
+        String sql = "INSERT INTO Pacotes_adquiridos (id_cliente, id_pacote, status) VALUES (?, ?, ?)";
 
         try
         {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, pacote_adquirido.getCliente().getId_cliente());
+            statement.setLong(1, pacote_adquirido.getUsuario().getId());
             statement.setLong(2, pacote_adquirido.getPacote().getId_pacote());
+            statement.setString(3, pacote_adquirido.getStatus());
             statement.executeUpdate();
 
             statement.close();

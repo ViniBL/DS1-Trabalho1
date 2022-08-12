@@ -1,11 +1,10 @@
 package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.pacoteDAO;
-import br.ufscar.dc.dsw.dao.AgenciaDAO;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.dao.DestinoDAO;
 import br.ufscar.dc.dsw.domain.pacote;
-import br.ufscar.dc.dsw.domain.agencia;
-//import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.domain.destino;
 
 import java.io.IOException;
@@ -79,26 +78,7 @@ public class pacoteController extends HttpServlet {
     private void lista(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<pacote> listaPacotes = new ArrayList<>();
-        String cidade = request.getParameter("cidade");
-        String nomeAgencia = request.getParameter("nome");
-        String dataPartida = request.getParameter("data_partida");
-        
-        if(request.getParameter("cidade") != null){
-            listaPacotes.add(dao.getbyDestino(request.getParameter("cidade")));
-        }
-        else if(request.getParameter("nome") != null){
-            listaPacotes = dao.getbyAgencia(nomeAgencia);
-            //request.setAttribute("listaPacotes", listaPacotes);
-        }
-        else if(request.getParameter("data_partida") != null){
-           
-            listaPacotes = dao.getbyData_partida(dataPartida);
-            //request.setAttribute("listaPacotes", listaPacotes);
-        }
-        else if(cidade == null && nomeAgencia == null && dataPartida == null){
-            listaPacotes = dao.getAll();
-            //request.setAttribute("listaPacotes", listaPacotes);
-        }
+        listaPacotes = dao.getAll();
         request.setAttribute("listaPacotes", listaPacotes);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/pacote/lista.jsp");
         dispatcher.forward(request, response);
@@ -107,8 +87,8 @@ public class pacoteController extends HttpServlet {
 
     private Map<Long, String> getAgencias() {
         Map <Long,String> agencias = new HashMap<>();
-        for (agencia agencia: new AgenciaDAO().getAll()) {
-            agencias.put(agencia.getId_agencia(), agencia.getNome());
+        for (Usuario agencia: new UsuarioDAO().getAllAgencia()) {
+            agencias.put(agencia.getId(), agencia.getNome());
         }
         return agencias;
     }
@@ -131,7 +111,7 @@ public class pacoteController extends HttpServlet {
 
     private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id_usuario"));
+        Long id = Long.parseLong(request.getParameter("id_pacote"));
         pacote pacote = dao.get(id);
         request.setAttribute("pacote", pacote);
         request.setAttribute("agencias", getAgencias());
@@ -148,9 +128,9 @@ public class pacoteController extends HttpServlet {
         Integer duracao = Integer.parseInt(request.getParameter("duracao"));
         Float valor = Float.parseFloat(request.getParameter("valor"));
         
-        Long agenciaId = Long.parseLong(request.getParameter("agenciaId"));
-        agencia agencia = new AgenciaDAO().get(agenciaId);
-        Long destinoId = Long.parseLong(request.getParameter("destinoId"));
+        Long agenciaId = Long.parseLong(request.getParameter("id_agencia"));
+        Usuario agencia = new UsuarioDAO().getAgenciaByID(agenciaId);
+        Long destinoId = Long.parseLong(request.getParameter("id_destino"));
         destino destino = new DestinoDAO().get(destinoId);
         
         pacote pacote = new pacote(data_partida, duracao, valor, descricao, agencia, destino);
@@ -168,13 +148,13 @@ public class pacoteController extends HttpServlet {
         Integer duracao = Integer.parseInt(request.getParameter("duracao"));
         Float valor = Float.parseFloat(request.getParameter("valor"));
         
-        Long agenciaId = Long.parseLong(request.getParameter("agenciaId"));
-        agencia agencia = new AgenciaDAO().get(agenciaId);
-        Long destinoId = Long.parseLong(request.getParameter("destinoId"));
+        Long agenciaId = Long.parseLong(request.getParameter("id_agencia"));
+        Usuario agencia = new UsuarioDAO().getAgenciaByID(agenciaId);
+        Long destinoId = Long.parseLong(request.getParameter("id_destino"));
         destino destino = new DestinoDAO().get(destinoId);
         
         pacote pacote = new pacote(id_pacote, data_partida, duracao, valor, descricao, agencia, destino);
-        dao.insert(pacote);
+        dao.update(pacote);
         response.sendRedirect("lista.jsp");
     }
 
