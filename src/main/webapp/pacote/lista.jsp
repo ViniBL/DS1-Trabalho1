@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-    import java.util.List;
+<%@ page import="java.util.List" %>
 
-    import br.ufscar.dc.dsw.dao.DestinoDAO;
-    import br.ufscar.dc.dsw.dao.AgenciaDAO;
-    import br.ufscar.dc.dsw.dao.pacoteDAO;
-    import br.ufscar.dc.dws.domain.pacote;
-    import br.ufscar.dc.dsw.domain.agencia;
-    import br.ufscar.dc.dsw.domain.destino; 
 
+<%@
+    page importC = "br.ufscar.dc.dsw.dao.DestinoDAO,br.ufscar.dc.dsw.dao.AgenciaDAO,br.ufscar.dc.dsw.dao.pacoteDAO,br.ufscar.dc.dws.domain.pacote,br.ufscar.dc.dsw.domain.agencia,br.ufscar.dc.dsw.domain.destino
 %>
 <!DOCTYPE html>
 <html>
