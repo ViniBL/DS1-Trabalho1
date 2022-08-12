@@ -3,9 +3,6 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%
-	Float valorProposta = 0;
-%>
 
 <table border="1">
 	<caption>
@@ -21,8 +18,7 @@
 	<tr>
 		<td><input type="number" id="valor" name="valor" size="10"
 			required value="${pacote.valor}" /></td>
-		<td><input type="number" id="valorProposta" name="valorPorposta" size="10"
-			required value ="<%=valorProposta%>" /></td>
+		<td><input type="number" id="valorProposta" name="valorPorposta" size="10" /></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center"><input type="submit" value="Comprar" /></td>
