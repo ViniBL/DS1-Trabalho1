@@ -209,7 +209,7 @@ public class UsuarioDAO extends GenericDAO {
             statement.setString(2, usuario.getLogin());
             statement.setString(3, usuario.getSenha());
             
-            statement.setLong(5, usuario.getId());
+            statement.setLong(4, usuario.getId());
             statement.executeUpdate();
 
             statement.close();

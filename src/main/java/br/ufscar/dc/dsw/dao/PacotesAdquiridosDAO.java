@@ -46,26 +46,26 @@ public class PacotesAdquiridosDAO extends GenericDAO {
 
     }
 
-    public List<pacotes_adquiridos> getAll() {
+    public List<pacotes_adquiridos> getAllCliente(Long id_cliente) {
 
     	List<pacotes_adquiridos>  listaPacotes_adquiridos = new ArrayList<>();
 
-        String sql = "SELECT * from pacotes_adquiridos";
+        String sql = "SELECT * from Pacotes_adquiridos p where p.id_usuario=?";
 
         try {
             Connection conn = this.getConnection();
-            Statement statement = conn.createStatement();
+            PreparedStatement statement = conn.prepareStatement(sql);
 
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
+            statement.setLong(1, id_cliente);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
                 Long id_pacote_adquirido = resultSet.getLong("id_pacote_adquirido");
                 String status = resultSet.getString("status");
-                Long id_cliente = resultSet.getLong("id_cliente");
                 Long id_pacote = resultSet.getLong("id_pacote");
 
         
                 pacote pacote = new pacoteDAO().get(id_pacote);
-                cliente cliente = new ClienteDAO().get(id_cliente);
+                Usuario cliente = new UsuarioDAO().getClienteByID(id_cliente);
                 pacotes_adquiridos pacote_adquirido = new pacotes_adquiridos(id_pacote_adquirido, status, cliente, pacote);
                 listaPacotes_adquiridos.add(pacote_adquirido);
             }
@@ -81,7 +81,7 @@ public class PacotesAdquiridosDAO extends GenericDAO {
 
     public void delete(pacotes_adquiridos pacote_adquirido)
     {
-       String sql = "DELETE FROM pacotes_adquiridos where id = ?";
+       String sql = "DELETE FROM Pacotes_adquiridos p where p.id_pacote_adquirido = ?";
 
        try {
            Connection conn = this.getConnection();
@@ -100,7 +100,7 @@ public class PacotesAdquiridosDAO extends GenericDAO {
      public pacotes_adquiridos get(Long id_pacote_adquirido)
    {
        pacotes_adquiridos pacote_adquirido = null;
-       String sql = "SELECT * from pacotes_adquiridos where id = ?";
+       String sql = "SELECT * from Pacotes_adquiridos p where p.id_pacote_adquirido = ?";
 
        try
        {
@@ -118,7 +118,7 @@ public class PacotesAdquiridosDAO extends GenericDAO {
                Long clienteId = resultSet.getLong("id_cliente");
 
                pacote pacote = new pacoteDAO().get(pacoteId);
-               cliente cliente = new ClienteDAO().get(clienteId);
+               Usuario cliente = new UsuarioDAO().getClienteByID(clienteId);
 
                pacote_adquirido = new pacotes_adquiridos(id_pacote_adquirido, status, cliente, pacote);
            }
@@ -139,8 +139,7 @@ public class PacotesAdquiridosDAO extends GenericDAO {
    
      public void update(pacotes_adquiridos pacote_adquirido)
    {
-       String sql = "UPDATE pacotes_adquiridos SET status = ?";
-       sql += "WHERE id_pacote_adquirido = ? ";
+       String sql = "UPDATE Pacotes_adquiridos SET status = ? WHERE id_pacote_adquirido = ? ";
 
        try
        {
@@ -150,9 +149,8 @@ public class PacotesAdquiridosDAO extends GenericDAO {
            statement.setString(1, pacote_adquirido.getStatus());
            statement.setLong(2, pacote_adquirido.getId_pacote_adquirido());
            statement.executeUpdate();
-
-
-
+           statement.close();
+           conn.close();
        }
        catch (SQLException e) 
        {
