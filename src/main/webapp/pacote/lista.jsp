@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    import java.util.List;
+
+    import br.ufscar.dc.dsw.dao.DestinoDAO;
+    import br.ufscar.dc.dsw.dao.AgenciaDAO;
+    import br.ufscar.dc.dsw.dao.pacoteDAO;
+    import br.ufscar.dc.dws.domain.pacote;
+    import br.ufscar.dc.dsw.domain.agencia;
+    import br.ufscar.dc.dsw.domain.destino; 
+
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,7 +39,7 @@
                     List<destino>destinos = dDao.getAll();
                     for(destino d : destinos){
                     %>
-                    <option><%=d.getEstado(); %></option>
+                    <option><%=d.getEstado() %></option>
                     <% } %> 
                 </select>
                 <select id="filter_agencia" name="filtro">
@@ -38,7 +49,7 @@
                     List<agencia>agencias = aDao.getAll();
                     for(agencia a : agencias){
                     %>
-                    <option><%=a.getNome(); %></option>
+                    <option><%=a.getNome() %></option>
                     <% } %> 
                 </select>
                 <select id="filter_data" name="filtro">  
@@ -48,7 +59,7 @@
                     List<pacote>pacotes = pDao.getAll();
                     for(pacote p : pacotes){
                     %>
-                    <option><%=p.getData_partida(); %></option>
+                    <option><%=p.getData_partida() %></option>
                     <% } %> 
                 </select>
                 
