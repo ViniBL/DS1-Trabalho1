@@ -21,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import br.ufscar.dc.dsw.util.Erro;
 
 @WebServlet(urlPatterns = "/usuario/pacotes/*")
 public class pacoteControllerUser extends HttpServlet {
@@ -75,6 +76,8 @@ public class pacoteControllerUser extends HttpServlet {
                 case "/compra":
                     compra(request, response);
                     break;
+                case "/erro":
+                    erroCompra(request, response);
                 default:
                     lista(request, response);
                     break;
@@ -102,6 +105,7 @@ public class pacoteControllerUser extends HttpServlet {
         }
         return agencias;
     }
+
     /*
     private Map<Long, String> getDestinos() {
         Map <Long,String> destinos = new HashMap<>();
@@ -126,15 +130,25 @@ public class pacoteControllerUser extends HttpServlet {
         
         String status = "ADQUIRIDO";
         Long id_pacote = Long.parseLong(request.getParameter("id_pacote"));
-        Long id_cliente = Long.parseLong(request.getParameter("id_cliente"));
-
-        Usuario cliente = new UsuarioDAO().getClienteByID(id_cliente);
+        //Long id_cliente = Long.parseLong(request.getParameter("id_cliente"));
+        Usuario cliente = (Usuario) request.getSession().getAttribute("usuarioLogado");
+        //Usuario cliente = new UsuarioDAO().getClienteByID(id_cliente);
         pacote pacote = new pacoteDAO().get(id_pacote);
 
         pacotes_adquiridos pacoteAdquirido = new pacotes_adquiridos(status, cliente, pacote);
         daoPA.insert(pacoteAdquirido);
         response.sendRedirect("lista.jsp");
 
+    }
+    
+    protected void erroCompra(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Erro erros = new Erro();
+        erros.add("Valor de proposta insuficiente!");
+        erros.add("Faça uma proposta no mínimo equivalente ao valor do pacote.");
+        request.setAttribute("mensagens", erros);
+        RequestDispatcher rd = request.getRequestDispatcher("/logado/usuario/erroCompra.jsp");
+        rd.forward(request, response); 
     }
 
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)

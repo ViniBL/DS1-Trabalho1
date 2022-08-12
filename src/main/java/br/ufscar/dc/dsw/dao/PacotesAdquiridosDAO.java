@@ -23,7 +23,7 @@ public class PacotesAdquiridosDAO extends GenericDAO {
 
     public void insert(pacotes_adquiridos pacote_adquirido)
     {
-        String sql = "INSERT INTO Pacotes_adquiridos (id_cliente, id_pacote, status) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Pacotes_adquiridos (id_usuario, id_pacote, status) VALUES (?, ?, ?)";
 
         try
         {
@@ -42,7 +42,6 @@ public class PacotesAdquiridosDAO extends GenericDAO {
         {
             throw new RuntimeException(e);
         }
-
 
     }
 

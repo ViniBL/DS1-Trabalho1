@@ -8,6 +8,7 @@ public class pacote{
 	private String data_partida;
 	private int duracao;
 	private Float valor;
+	private Float valorProposta;
 	private String descricao;
 	private Usuario usuario;
 	private destino destino;
@@ -31,6 +32,19 @@ public class pacote{
 		this(data_partida, duracao, valor, descricao, usuario, destino);
 		this.id_pacote = id_pacote;
 
+	}
+
+	public pacote(Long id_pacote, String data_partida, int duracao, Float valor, Float valorProposta, String descricao,
+			Usuario usuario, destino destino){
+		this(data_partida, duracao, valor, descricao, usuario, destino);
+		this.valorProposta = valorProposta;
+		this.id_pacote = id_pacote;
+
+	}
+
+	public pacote(Long id_pacote, Float valorProposta){
+		this.id_pacote = id_pacote;
+		this.valorProposta = valorProposta;
 	}
 	
 	public Long getId_pacote() {
@@ -63,6 +77,13 @@ public class pacote{
 	
 	public void setValor(Float valor) {
 		this.valor = valor;
+	}
+
+	public Float getValorProposta() {
+		return valorProposta;
+	}
+	public void setValorProposta(Float valorProposta) {
+		this.valorProposta = valorProposta;
 	}
 	
 	public String getDescricao() {

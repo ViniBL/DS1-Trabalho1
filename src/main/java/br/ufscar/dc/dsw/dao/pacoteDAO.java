@@ -250,17 +250,55 @@ public class pacoteDAO extends GenericDAO {
 
            if(resultSet.next())
            {
-               String data_partida = resultSet.getString("data_partida");
-               int duracao = resultSet.getInt("duracao");
-               float valor = resultSet.getFloat("valor");
-               String descricao =  resultSet.getString("descricao");
 
                Long agenciaId = resultSet.getLong("id_usuario");
                Long destinoId = resultSet.getLong("id_destino");
+               String data_partida = resultSet.getString("data_partida");
+               int duracao = resultSet.getInt("duracao");
+               float valor = resultSet.getFloat("valor");
+               Float valorProposta = resultSet.getFloat("valorProposta");
+               String descricao =  resultSet.getString("descricao");
+
+               
                Usuario agencia =  new UsuarioDAO().getAgenciaByID(agenciaId);
                destino destino = new DestinoDAO().get(destinoId);
 
-               pacote = new pacote(id_pacote, data_partida, duracao, valor, descricao, agencia, destino);
+               pacote = new pacote(id_pacote, data_partida, duracao, valor, valorProposta, descricao, agencia, destino);
+           }
+       
+
+       resultSet.close();
+       statement.close();
+       conn.close();
+    }
+
+       catch (SQLException e) 
+       {
+           throw new RuntimeException(e);
+       }
+
+       return pacote;
+   }
+
+   public pacote getValorProposta(Long id_pacote)
+   {
+       pacote pacote = null;
+       String sql = "SELECT *from Pacote p where id_pacote = ?";
+
+       try
+       {
+           Connection conn = this.getConnection();
+           PreparedStatement statement = conn.prepareStatement(sql);
+
+           statement.setLong(1, id_pacote);
+
+           ResultSet resultSet = statement.executeQuery();
+
+           if(resultSet.next())
+           {
+               Float valorProposta = resultSet.getFloat("valorProposta");
+
+               pacote = new pacote(id_pacote, valorProposta);
            }
        
 
