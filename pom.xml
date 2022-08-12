@@ -43,13 +43,18 @@
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+    		<groupId>javax.persistence</groupId>
+    		<artifactId>persistence-api</artifactId>
+    		<version>1.0.2</version>
+		</dependency>
 		
 		<!-- Driver JDBC (Banco de Dados MySQL) -->
 		    
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.21</version>
+			<version>8.0.30</version>
             <scope>runtime</scope>
 		</dependency>
 		

@@ -22,7 +22,7 @@ public class cliente {
         this.usuario = usuario;
     }
 
-    public cliente(String cpf, String telefone, String sexo, String data_nascimento,
+    public cliente(Long id_cliente, String cpf, String telefone, String sexo, String data_nascimento,
             Usuario usuario) {
         this(cpf, telefone, sexo, data_nascimento, usuario);
         this.id_cliente = id_cliente;

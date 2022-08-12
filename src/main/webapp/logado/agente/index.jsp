@@ -9,6 +9,7 @@
     <body>
         <h1>Página do Agente</h1>
         <p>Olá ${sessionScope.usuarioLogado.nome}</p>
+        <a href="pacotes">Lista Pacotes</a>
         <ul>
             <li>
                 <a href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
