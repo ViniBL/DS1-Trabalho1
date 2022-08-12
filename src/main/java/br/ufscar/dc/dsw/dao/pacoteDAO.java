@@ -65,19 +65,9 @@ public class pacoteDAO extends GenericDAO {
                 float valor = resultSet.getFloat("p.valor");
                 String descricao = resultSet.getString("p.descricao");
 
-                /*Long id = resultSet.getLong(8);
-                String nome = resultSet.getString("a.nome");
-                String cnpj = resultSet.getString("a.cnpj");
-                String descricao1 = resultSet.getString("a.descricao");*/
-                
                 String cidade = resultSet.getString("d.cidade");
                 String estado = resultSet.getString("d.estado");
                 String pais = resultSet.getString("d.pais");
-                
-                /*String nome1 = resultSet.getString("u.nome");
-                String login = resultSet.getString("u.login");
-                String senha = resultSet.getString("u.senha");
-                String papel = resultSet.getString("u.papel");*/
                 
                 Usuario usuario = new UsuarioDAO().getAgenciaByID(id_usuario);
                 destino destino = new destino(id_destino, cidade, estado, pais);
@@ -94,6 +84,46 @@ public class pacoteDAO extends GenericDAO {
         return listaPacotes;
     }
 
+	public List<pacote> getAll() {
+
+    	List<pacote>  listaPacotes = new ArrayList<>();
+
+        String sql = "SELECT * from Pacote p, Destino d, Usuario u where p.id_usuario = u.id_usuario and p.id_destino = d.id_destino order by p.id_pacote;";
+        
+
+
+        try {
+            Connection conn = this.getConnection();
+            Statement statement = conn.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                Long id_pacote = resultSet.getLong("p.id_pacote");
+                Long id_usuario = resultSet.getLong(2);
+                Long id_destino = resultSet.getLong(3);
+                String data_partida = resultSet.getString("p.data_partida");
+                int duracao = resultSet.getInt("p.duracao");
+                float valor = resultSet.getFloat("p.valor");
+                String descricao = resultSet.getString("p.descricao");
+
+                String cidade = resultSet.getString("d.cidade");
+                String estado = resultSet.getString("d.estado");
+                String pais = resultSet.getString("d.pais");
+                
+                Usuario usuario = new UsuarioDAO().getAgenciaByID(id_usuario);
+                destino destino = new destino(id_destino, cidade, estado, pais);
+                pacote pacote = new pacote(id_pacote, data_partida, duracao, valor, descricao, usuario, destino);
+                listaPacotes.add(pacote);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaPacotes;
+    }
    
     public pacote getbyDestino(String destino) {
 
@@ -250,17 +280,55 @@ public class pacoteDAO extends GenericDAO {
 
            if(resultSet.next())
            {
-               String data_partida = resultSet.getString("data_partida");
-               int duracao = resultSet.getInt("duracao");
-               float valor = resultSet.getFloat("valor");
-               String descricao =  resultSet.getString("descricao");
 
                Long agenciaId = resultSet.getLong("id_usuario");
                Long destinoId = resultSet.getLong("id_destino");
+               String data_partida = resultSet.getString("data_partida");
+               int duracao = resultSet.getInt("duracao");
+               float valor = resultSet.getFloat("valor");
+               Float valorProposta = resultSet.getFloat("valorProposta");
+               String descricao =  resultSet.getString("descricao");
+
+               
                Usuario agencia =  new UsuarioDAO().getAgenciaByID(agenciaId);
                destino destino = new DestinoDAO().get(destinoId);
 
-               pacote = new pacote(id_pacote, data_partida, duracao, valor, descricao, agencia, destino);
+               pacote = new pacote(id_pacote, data_partida, duracao, valor, valorProposta, descricao, agencia, destino);
+           }
+       
+
+       resultSet.close();
+       statement.close();
+       conn.close();
+    }
+
+       catch (SQLException e) 
+       {
+           throw new RuntimeException(e);
+       }
+
+       return pacote;
+   }
+
+   public pacote getValorProposta(Long id_pacote)
+   {
+       pacote pacote = null;
+       String sql = "SELECT *from Pacote p where id_pacote = ?";
+
+       try
+       {
+           Connection conn = this.getConnection();
+           PreparedStatement statement = conn.prepareStatement(sql);
+
+           statement.setLong(1, id_pacote);
+
+           ResultSet resultSet = statement.executeQuery();
+
+           if(resultSet.next())
+           {
+               Float valorProposta = resultSet.getFloat("valorProposta");
+
+               pacote = new pacote(id_pacote, valorProposta);
            }
        
 

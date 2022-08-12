@@ -17,7 +17,7 @@
 	</tr>
 	<tr>
 		<td>${pacote.valor}</td>
-		<td><input type="number" id="valorProposta" name="valorPorposta" size="10" /></td>
+		<td><input type="number" id="valorProposta" name="valorPorposta" size="10" required value="${pacote.valorProposta}" /></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center"><input type="submit" value="Comprar" /></td>

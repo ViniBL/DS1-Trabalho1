@@ -23,7 +23,7 @@ public class PacotesAdquiridosDAO extends GenericDAO {
 
     public void insert(pacotes_adquiridos pacote_adquirido)
     {
-        String sql = "INSERT INTO Pacotes_adquiridos (id_cliente, id_pacote, status) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Pacotes_adquiridos (id_usuario, id_pacote, status) VALUES (?, ?, ?)";
 
         try
         {
@@ -43,14 +43,13 @@ public class PacotesAdquiridosDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
 
-
     }
 
     public List<pacotes_adquiridos> getAllCliente(Long id_cliente) {
 
     	List<pacotes_adquiridos>  listaPacotes_adquiridos = new ArrayList<>();
 
-        String sql = "SELECT * from Pacotes_adquiridos p where p.id_usuario=?";
+        String sql = "SELECT * from Pacotes_adquiridos where id_usuario=?";
 
         try {
             Connection conn = this.getConnection();

@@ -53,7 +53,8 @@ create table Pacote(
     id_destino bigint not null, 
     data_partida varchar(10) not null, 
     duracao int not null, 
-    valor float not null, 
+    valor float not null,
+    valorProposta float default null,
     descricao varchar(256) not null, 
     primary key(id_pacote), 
     foreign key (id_usuario) references Usuario(id_usuario), 
@@ -66,7 +67,6 @@ create table Pacotes_adquiridos(
     id_usuario bigint not null, 
     id_pacote bigInt not null, 
     status varchar(9),
-    valorProposta float,
     primary key(id_pacote_adquirido), 
     CONSTRAINT status_check CHECK (status IN('CANCELADO', 'ADQUIRIDO'))
 );

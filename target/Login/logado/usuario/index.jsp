@@ -11,6 +11,8 @@
         <p>Olá ${sessionScope.usuarioLogado.nome}</p>
         <br>
         <a href="pacotes">Lista Pacotes</a>
+        <br>
+        <a href="pacotesAdquiridos">Pacotes Adquiridos</a>
         <ul>
             <li>
                 <a href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
