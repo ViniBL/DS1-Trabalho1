@@ -10,14 +10,14 @@
 
 <body>
 	<div align="center">
-		<h1>Gerenciamento de Livros</h1>
+		<h1>Gerenciamento de Pacotes</h1>
 		<h2>
-			<a href="lista">Lista de Livros</a>
+			<a href="lista">Lista de Pacotes</a>
 		</h2>
 	</div>
 	<div align="center">
 		<c:choose>
-			<c:when test="${livro != null}">
+			<c:when test="${pacote != null}">
 				<form action="atualizacao" method="post">
 					<%@include file="campos.jsp"%>
 				</form>

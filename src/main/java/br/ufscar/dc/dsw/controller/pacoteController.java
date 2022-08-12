@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/pacotes/*")
+@WebServlet(urlPatterns = "/agente/pacotes/*")
 public class pacoteController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -80,7 +80,7 @@ public class pacoteController extends HttpServlet {
         List<pacote> listaPacotes = new ArrayList<>();
         listaPacotes = dao.getAll();
         request.setAttribute("listaPacotes", listaPacotes);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pacote/lista.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agente/lista.jsp");
         dispatcher.forward(request, response);
         
     }
@@ -152,7 +152,6 @@ public class pacoteController extends HttpServlet {
         Usuario agencia = new UsuarioDAO().getAgenciaByID(agenciaId);
         Long destinoId = Long.parseLong(request.getParameter("id_destino"));
         destino destino = new DestinoDAO().get(destinoId);
-        
         pacote pacote = new pacote(id_pacote, data_partida, duracao, valor, descricao, agencia, destino);
         dao.update(pacote);
         response.sendRedirect("lista.jsp");

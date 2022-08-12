@@ -6,7 +6,7 @@
 <table border="1">
 	<caption>
 		<c:choose>
-			<c:when test="${livro != null}">
+			<c:when test="${pacote != null}">
                             Edição
                         </c:when>
 			<c:otherwise>
@@ -14,38 +14,44 @@
                         </c:otherwise>
 		</c:choose>
 	</caption>
-	<c:if test="${livro != null}">
-		<input type="hidden" name="id" value="${livro.id}" />
+	<c:if test="${pacotes != null}">
+		
+		<input type="hidden" name="id_pacote" value="${pacote.id_pacote}" />
+		<input type="hidden" name="id_agencia" value="${3}" />
 	</c:if>
 	<tr>
-		<td><label for="titulo">Título</label></td>
-		<td><input type="text" id="titulo" name="titulo" size="45"
-			required value="${livro.titulo}" /></td>
+		<td><label for="cidade">cidade</label></td>
+		<td><input type="text" id="cidade" name="cidade" size="45" required
+			value="${pacote.destino.cidade}" /></td>
 	</tr>
 	<tr>
-		<td><label for="autor">Autor</label></td>
-		<td><input type="text" id="autor" name="autor" size="45" required
-			value="${livro.autor}" /></td>
+		<td><label for="estado">estado</label></td>
+		<td><input type="text" id="estado" name="estado" size="45" required
+			value="${pacote.destino.estado}" /></td>
 	</tr>
 	<tr>
-		<td><label for="editora">Editora</label></td>
-		<td><select id="editora" name="editora">
-				<c:forEach items="${editoras}" var="editora">
-					<option value="${editora.key}"
-						${livro.editora.nome==editora.value ? 'selected' : '' }>
-						${editora.value}</option>
-				</c:forEach>
-		</select></td>
+		<td><label for="pais">pais</label></td>
+		<td><input type="text" id="pais" name="pais" size="45" required
+			value="${pacote.destino.pais}" /></td>
 	</tr>
 	<tr>
-		<td><label for="ano">Ano</label></td>
-		<td><input type="number" id="ano" name="ano" size="5" required
-			min="1500" value="${livro.ano}" /></td>
+		<td><label for="partida">Data de partida</label></td>
+		<td><input type="text" id="partida" name="partida" required
+			size="45" value="${pacote.data_partida}" /></td>
 	</tr>
 	<tr>
-		<td><label for="preco">Preço</label></td>
-		<td><input type="number" id="preco" name="preco" required
-			min="0.01" step="any" size="5" value="${livro.preco}" /></td>
+		<td><label for="duracao">Duração</label></td>
+		<td><input type="number" id="duracao" name="duracao" size="5" required value="${pacote.duracao}" /></td>
+	</tr>
+	<tr>
+		<td><label for="valor">Preço</label></td>
+		<td><input type="number" id="valor" name="valor" required
+			min="0.01" step="any" size="5" value="${pacote.valor}" /></td>
+	</tr>
+	<tr>
+		<td><label for="descricao">Descrição</label></td>
+		<td><input type="text" id="descricao" name="descricao" required
+			min="0.01" step="any" size="5" value="${pacote.descricao}" /></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center"><input type="submit" value="Salva" /></td>

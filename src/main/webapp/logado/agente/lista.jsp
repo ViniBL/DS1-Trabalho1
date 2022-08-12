@@ -12,7 +12,7 @@
         <%
 		    String contextPath = request.getContextPath().replace("/", "");
 	    %>
-        <a href="/Login/agencia/">Voltar</a>
+        <a href="/Login/agente/">Voltar</a>
 	    <div align="center">
 		    <h1>Pacotes de Viagens</h1>
            
@@ -30,6 +30,7 @@
                     <th>Duração da Viagem</th>
                     <th>Valor</th>
                     <th>Descrição</th>
+                    
                 </tr>
                 <c:forEach var="pacote" items="${requestScope.listaPacotes}">
                     <tr>
@@ -40,6 +41,11 @@
                         <td>R$${pacote.valor}</td>
                         <td>${pacote.descricao}</td>
                         
+                            <td>
+                                <a href="/<%= contextPath%>/agente/pacotes/edicao?id_pacote=${pacote.id_pacote}">Edição</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="/<%= contextPath%>/agente/pacotes/remocao?id_pacote=${pacote.id_pacote}" onclick="return confirm('Tem certeza de que deseja excluir este item?');">Remoção</a>
+                            </td>
                     </tr>
                 </c:forEach>
             </table>
