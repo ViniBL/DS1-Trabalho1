@@ -3,8 +3,13 @@ package br.ufscar.dc.dsw.domain;
 public class pacotes_adquiridos {
 	private Long id_pacote_adquirido;
 	private String status;
+	private Float valorProposta;
 	private Usuario cliente;
 	private pacote pacote;
+
+	public pacotes_adquiridos(Long id_pacote_adquirido){
+		this.id_pacote_adquirido = id_pacote_adquirido;
+	}
 
 	public pacotes_adquiridos(Long id_pacote_adquirido, String status, br.ufscar.dc.dsw.domain.Usuario cliente,
 			br.ufscar.dc.dsw.domain.pacote pacote) {
@@ -21,6 +26,11 @@ public class pacotes_adquiridos {
 		this.pacote = pacote;
 	}
 
+	public pacotes_adquiridos(Long id, Float valorProposta){
+		this.id_pacote_adquirido = id;
+		this.valorProposta = valorProposta;
+	}
+
 	public Long getId_pacote_adquirido() {
 		return id_pacote_adquirido;
 	}
@@ -32,6 +42,12 @@ public class pacotes_adquiridos {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public Float getValorProposta() {
+		return valorProposta;
+	}
+	public void setValorProposta(Float valorProposta) {
+		this.valorProposta = valorProposta;
 	}
 	public Usuario getUsuario() {
 		return cliente;

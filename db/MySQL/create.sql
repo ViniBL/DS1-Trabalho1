@@ -65,7 +65,8 @@ create table Pacotes_adquiridos(
     id_pacote_adquirido bigint not null auto_increment, 
     id_usuario bigint not null, 
     id_pacote bigInt not null, 
-    status varchar(9), 
+    status varchar(9),
+    valorProposta float,
     primary key(id_pacote_adquirido), 
     CONSTRAINT status_check CHECK (status IN('CANCELADO', 'ADQUIRIDO'))
 );
